@@ -1,0 +1,595 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2016 by Takahiro Ueda <tueda@nikhef.nl>
+%
+% This file may be distributed and/or modified under the conditions of
+% the LaTeX Project Public License, either version 1.3 of this license
+% or (at your option) any later version. The latest version of this
+% license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% To typeset this document, type the following commands:
+%   latex autobreak.dtx
+%   makeindex -s gind.ist autobreak.idx
+%   makeindex -s gglo.ist -o autobreak.gls autobreak.glo
+%   latex autobreak.dtx
+%   latex autobreak.dtx
+%
+%<*ignore>
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</ignore>
+%<*install>
+
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+
+This is a generated file.
+
+Copyright (C) 2016 by Takahiro Ueda <tueda@nikhef.nl>
+
+This file may be distributed and/or modified under the conditions of
+the LaTeX Project Public License, either version 1.3 of this license
+or (at your option) any later version. The latest version of this
+license is in:
+
+  http://www.latex-project.org/lppl.txt
+
+and version 1.3 or later is part of all distributions of LaTeX
+version 2005/12/01 or later.
+
+\endpreamble
+
+\generate{
+  \usedir{tex/latex/autobreak}
+  \file{\jobname.sty}{\from{\jobname.dtx}{package}}
+}
+
+%</install>
+%<*ignore>
+\iffalse
+%</ignore>
+%<*install>
+
+\obeyspaces
+\Msg{*************************************************************}
+\Msg{*                                                           *}
+\Msg{* To finish the installation you have to move the following *}
+\Msg{* file into a directory searched by TeX:                    *}
+\Msg{*                                                           *}
+\Msg{*     autobreak.sty                                         *}
+\Msg{*                                                           *}
+\Msg{* To produce the documentation run the file autobreak.dtx   *}
+\Msg{* through LaTeX.                                            *}
+\Msg{*                                                           *}
+\Msg{* Happy TeXing!                                             *}
+\Msg{*                                                           *}
+\Msg{*************************************************************}
+
+\endbatchfile
+
+%</install>
+%<*ignore>
+\fi
+\generate{
+  \file{\jobname.ins}{\from{\jobname.dtx}{install}}
+}
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</ignore>
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{autobreak}[2016/05/29 v0.1 breaking equations]
+%</package>
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[numbered]{hypdoc}
+\usepackage{\jobname}
+\allowdisplaybreaks
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \GetFileInfo{\jobname.sty}
+%
+% \title{The \textsf{autobreak} package\thanks{This document corresponds
+%        to \textsf{autobreak}~\fileversion, dated \filedate.}}
+% \author{Takahiro Ueda \\ \texttt{tueda@nikhef.nl}}
+%
+% \date{29 May 2016}
+%
+% \maketitle
+%
+% \changes{v0.10}{2016/05/29}{Initial version}
+%
+% \section{Introduction}
+%
+% Sometimes people want to put long formulae in their documents, which
+% do not fit in a line and may span over multiple pages.
+% The following is a relatively \textit{short}^^A
+% \footnote{^^A
+%   One of the `worst' equations can be found in the appendices of
+%   \url{http://arxiv.org/abs/hep-ph/0504242}.
+% }
+% formula of explicitly
+% writing down the first 200 terms in the sum of the well-known Basel
+% problem:
+% \begin{align}
+% \begin{autobreak}
+% \zeta(2) = \\
+% 1 \\
+% + \frac{1}{4} \\
+% + \frac{1}{9} \\
+% + \frac{1}{16} \\
+% + \frac{1}{25} \\
+% + \frac{1}{36} \\
+% + \frac{1}{49} \\
+% + \frac{1}{64} \\
+% + \frac{1}{81} \\
+% + \frac{1}{100} \\
+% + \frac{1}{121} \\
+% + \frac{1}{144} \\
+% + \frac{1}{169} \\
+% + \frac{1}{196} \\
+% + \frac{1}{225} \\
+% + \frac{1}{256} \\
+% + \frac{1}{289} \\
+% + \frac{1}{324} \\
+% + \frac{1}{361} \\
+% + \frac{1}{400} \\
+% + \frac{1}{441} \\
+% + \frac{1}{484} \\
+% + \frac{1}{529} \\
+% + \frac{1}{576} \\
+% + \frac{1}{625} \\
+% + \frac{1}{676} \\
+% + \frac{1}{729} \\
+% + \frac{1}{784} \\
+% + \frac{1}{841} \\
+% + \frac{1}{900} \\
+% + \frac{1}{961} \\
+% + \frac{1}{1024} \\
+% + \frac{1}{1089} \\
+% + \frac{1}{1156} \\
+% + \frac{1}{1225} \\
+% + \frac{1}{1296} \\
+% + \frac{1}{1369} \\
+% + \frac{1}{1444} \\
+% + \frac{1}{1521} \\
+% + \frac{1}{1600} \\
+% + \frac{1}{1681} \\
+% + \frac{1}{1764} \\
+% + \frac{1}{1849} \\
+% + \frac{1}{1936} \\
+% + \frac{1}{2025} \\
+% + \frac{1}{2116} \\
+% + \frac{1}{2209} \\
+% + \frac{1}{2304} \\
+% + \frac{1}{2401} \\
+% + \frac{1}{2500} \\
+% + \frac{1}{2601} \\
+% + \frac{1}{2704} \\
+% + \frac{1}{2809} \\
+% + \frac{1}{2916} \\
+% + \frac{1}{3025} \\
+% + \frac{1}{3136} \\
+% + \frac{1}{3249} \\
+% + \frac{1}{3364} \\
+% + \frac{1}{3481} \\
+% + \frac{1}{3600} \\
+% + \frac{1}{3721} \\
+% + \frac{1}{3844} \\
+% + \frac{1}{3969} \\
+% + \frac{1}{4096} \\
+% + \frac{1}{4225} \\
+% + \frac{1}{4356} \\
+% + \frac{1}{4489} \\
+% + \frac{1}{4624} \\
+% + \frac{1}{4761} \\
+% + \frac{1}{4900} \\
+% + \frac{1}{5041} \\
+% + \frac{1}{5184} \\
+% + \frac{1}{5329} \\
+% + \frac{1}{5476} \\
+% + \frac{1}{5625} \\
+% + \frac{1}{5776} \\
+% + \frac{1}{5929} \\
+% + \frac{1}{6084} \\
+% + \frac{1}{6241} \\
+% + \frac{1}{6400} \\
+% + \frac{1}{6561} \\
+% + \frac{1}{6724} \\
+% + \frac{1}{6889} \\
+% + \frac{1}{7056} \\
+% + \frac{1}{7225} \\
+% + \frac{1}{7396} \\
+% + \frac{1}{7569} \\
+% + \frac{1}{7744} \\
+% + \frac{1}{7921} \\
+% + \frac{1}{8100} \\
+% + \frac{1}{8281} \\
+% + \frac{1}{8464} \\
+% + \frac{1}{8649} \\
+% + \frac{1}{8836} \\
+% + \frac{1}{9025} \\
+% + \frac{1}{9216} \\
+% + \frac{1}{9409} \\
+% + \frac{1}{9604} \\
+% + \frac{1}{9801} \\
+% + \frac{1}{10000} \\
+% + \frac{1}{10201} \\
+% + \frac{1}{10404} \\
+% + \frac{1}{10609} \\
+% + \frac{1}{10816} \\
+% + \frac{1}{11025} \\
+% + \frac{1}{11236} \\
+% + \frac{1}{11449} \\
+% + \frac{1}{11664} \\
+% + \frac{1}{11881} \\
+% + \frac{1}{12100} \\
+% + \frac{1}{12321} \\
+% + \frac{1}{12544} \\
+% + \frac{1}{12769} \\
+% + \frac{1}{12996} \\
+% + \frac{1}{13225} \\
+% + \frac{1}{13456} \\
+% + \frac{1}{13689} \\
+% + \frac{1}{13924} \\
+% + \frac{1}{14161} \\
+% + \frac{1}{14400} \\
+% + \frac{1}{14641} \\
+% + \frac{1}{14884} \\
+% + \frac{1}{15129} \\
+% + \frac{1}{15376} \\
+% + \frac{1}{15625} \\
+% + \frac{1}{15876} \\
+% + \frac{1}{16129} \\
+% + \frac{1}{16384} \\
+% + \frac{1}{16641} \\
+% + \frac{1}{16900} \\
+% + \frac{1}{17161} \\
+% + \frac{1}{17424} \\
+% + \frac{1}{17689} \\
+% + \frac{1}{17956} \\
+% + \frac{1}{18225} \\
+% + \frac{1}{18496} \\
+% + \frac{1}{18769} \\
+% + \frac{1}{19044} \\
+% + \frac{1}{19321} \\
+% + \frac{1}{19600} \\
+% + \frac{1}{19881} \\
+% + \frac{1}{20164} \\
+% + \frac{1}{20449} \\
+% + \frac{1}{20736} \\
+% + \frac{1}{21025} \\
+% + \frac{1}{21316} \\
+% + \frac{1}{21609} \\
+% + \frac{1}{21904} \\
+% + \frac{1}{22201} \\
+% + \frac{1}{22500} \\
+% + \frac{1}{22801} \\
+% + \frac{1}{23104} \\
+% + \frac{1}{23409} \\
+% + \frac{1}{23716} \\
+% + \frac{1}{24025} \\
+% + \frac{1}{24336} \\
+% + \frac{1}{24649} \\
+% + \frac{1}{24964} \\
+% + \frac{1}{25281} \\
+% + \frac{1}{25600} \\
+% + \frac{1}{25921} \\
+% + \frac{1}{26244} \\
+% + \frac{1}{26569} \\
+% + \frac{1}{26896} \\
+% + \frac{1}{27225} \\
+% + \frac{1}{27556} \\
+% + \frac{1}{27889} \\
+% + \frac{1}{28224} \\
+% + \frac{1}{28561} \\
+% + \frac{1}{28900} \\
+% + \frac{1}{29241} \\
+% + \frac{1}{29584} \\
+% + \frac{1}{29929} \\
+% + \frac{1}{30276} \\
+% + \frac{1}{30625} \\
+% + \frac{1}{30976} \\
+% + \frac{1}{31329} \\
+% + \frac{1}{31684} \\
+% + \frac{1}{32041} \\
+% + \frac{1}{32400} \\
+% + \frac{1}{32761} \\
+% + \frac{1}{33124} \\
+% + \frac{1}{33489} \\
+% + \frac{1}{33856} \\
+% + \frac{1}{34225} \\
+% + \frac{1}{34596} \\
+% + \frac{1}{34969} \\
+% + \frac{1}{35344} \\
+% + \frac{1}{35721} \\
+% + \frac{1}{36100} \\
+% + \frac{1}{36481} \\
+% + \frac{1}{36864} \\
+% + \frac{1}{37249} \\
+% + \frac{1}{37636} \\
+% + \frac{1}{38025} \\
+% + \frac{1}{38416} \\
+% + \frac{1}{38809} \\
+% + \frac{1}{39204} \\
+% + \frac{1}{39601} \\
+% + \frac{1}{40000} \\
+% + \dots .
+% \end{autobreak}
+% \end{align}
+% The above example might seem nonsense, but putting long formulae may
+% make a sense in some cases and become inevitable for completeness of
+% documents, writing self-contained papers, or just to impress readers.
+% They are typically generated as outputs of computer algebra systems,
+% and would have the form of a sum of many terms in which each
+% term is short.
+%
+% Then, the question is how to break long equations in such a way that
+% the equations do not make any overfull lines. Certainly, one can
+% attempt to manually insert line breaks by trial and error, checking
+% whether \LaTeX{} warns overfull lines, and this process could be
+% automatized by external scripts at some extent. A shortcoming of such
+% `manual' approaches is that line breaks have to be reexamined whenever
+% the layout of documents is changed, e.g., replacing the document class
+% or reusing existing equations into another document with a different
+% format.
+%
+% The goal of the \textsf{autobreak} package is to give a reasonable
+% solution for (semi-) automatic line breaking of long equations within
+% \LaTeX{}^^A
+% \footnote{^^A
+%   There is another package \textsf{breqn}, which adopts a more
+%   automatic fashion, leading to a more complicated code structure.
+% }.
+%
+% \section{Usage}
+%
+% The \textsf{autobreak} package is supposed to be used together with
+% the \textsf{amsmath} package.
+% \begin{verbatim}
+%     \usepackage{amsmath}
+%     \usepackage{autobreak}
+% \end{verbatim}
+% For long equations over multiple pages, you might use
+% \cs{allowdisplaybreaks}:
+% \begin{verbatim}
+%     \allowdisplaybreaks
+% \end{verbatim}
+%
+% \DescribeEnv{autobreak}
+% This environment is used for breaking lines in long equations.
+%
+% \begin{minipage}[t]{0.5\linewidth}
+%   \begin{verbatim}
+%     \begin{align}
+%       \begin{autobreak}
+%         \zeta(3) = \\
+%         1 \\
+%         + \frac{1}{8} \\
+%         + \frac{1}{27} \\
+%         + \frac{1}{64} \\
+%         + \frac{1}{125} \\
+%         + \frac{1}{216} \\
+%         + \frac{1}{343} \\
+%         + \frac{1}{512} \\
+%         + \frac{1}{729} \\
+%         + \frac{1}{1000} \\
+%         + \dots .
+%       \end{autobreak}
+%     \end{align}
+%   \end{verbatim}
+% \end{minipage}
+% \begin{minipage}[t]{0.45\linewidth}
+%     \begin{align}
+%       \begin{autobreak}
+%         \zeta(3) = \\
+%         1 \\
+%         + \frac{1}{8} \\
+%         + \frac{1}{27} \\
+%         + \frac{1}{64} \\
+%         + \frac{1}{125} \\
+%         + \frac{1}{216} \\
+%         + \frac{1}{343} \\
+%         + \frac{1}{512} \\
+%         + \frac{1}{729} \\
+%         + \frac{1}{1000} \\
+%         + \dots .
+%       \end{autobreak}
+%     \end{align}
+% \end{minipage}
+%
+% \StopEventually{^^A
+%   \PrintChanges
+%   \PrintIndex
+% }
+%
+% \section{Implementation}
+%
+%    \begin{macrocode}
+%<*package>
+%    \end{macrocode}
+%
+% We ensure that we can use \cs{collect@body}, which should be defined
+% in the \textsf{amsmath} package. Otherwise, it is available in the
+% \textsf{environ} package.
+%    \begin{macrocode}
+\RequirePackage{amsmath}
+\@ifundefined{collect@body}{
+  \RequirePackage{environ}
+}{}
+%    \end{macrocode}
+%
+% \begin{macro}{@autobreak@alltoks}
+% \begin{macro}{@autobreak@linetoks}
+% \begin{macro}{@autobreak@lhslength}
+% \begin{macro}{@autobreak@rhslength}
+% \begin{macro}{@autobreak@linelength}
+%    \begin{macrocode}
+\newtoks\@autobreak@alltoks
+\newtoks\@autobreak@linetoks
+\newdimen\@autobreak@lhslength
+\newdimen\@autobreak@rhslength
+\newdimen\@autobreak@linelength
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@sep}
+% The sum of the space needed for the both sides of |&|.
+% TODO: how can we know the exact extra space to be inserted?
+%    \begin{macrocode}
+\def\@autobreak@sp{7\p@}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{autobreak}
+%    \begin{macrocode}
+\newenvironment{autobreak}{%
+  \collect@body\@autobreak
+}{}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{@autobreak}
+%    \begin{macrocode}
+\def\@autobreak#1#2#3{%
+  \end{autobreak}%
+  \@autobreak@init
+  \@autobreak@scanline#1\\\@autobreak@end
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@scanline}
+%    \begin{macrocode}
+\def\@autobreak@scanline#1\\{%
+  \@ifnextchar\@autobreak@end{%
+    \@autobreak@processline{#1}%
+  }{%
+    \@autobreak@processline{#1}%
+    \@autobreak@scanline
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@init}
+%    \begin{macrocode}
+\def\@autobreak@init{%
+  \@autobreak@alltoks={}%
+  \@autobreak@linetoks={}%
+  \@autobreak@lhslength=\z@
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@end}
+%    \begin{macrocode}
+\def\@autobreak@end{%
+  \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
+    \expandafter{\the\@autobreak@linetoks}%
+  \the\@autobreak@alltoks
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@processline}
+%    \begin{macrocode}
+\def\@autobreak@processline#1{%
+  \ifdim\@autobreak@lhslength=\z@
+%    \end{macrocode}
+% For the LHS term.
+%    \begin{macrocode}
+    \@autobreak@settowidth\@autobreak@lhslength{#1}%
+    \ifdim\@autobreak@lhslength>\z@
+      \@autobreak@linelength=\linewidth
+      \advance\@autobreak@linelength by -\@autobreak@lhslength
+      \advance\@autobreak@linelength by -\@autobreak@sp
+      \@autobreak@alltoks={#1{}&}%
+    \fi
+  \else
+%    \end{macrocode}
+% For a term in the RHS.
+%    \begin{macrocode}
+    \@autobreak@settowidth\@autobreak@rhslength
+      {\the\@autobreak@linetoks#1}%
+    \ifdim\@autobreak@rhslength>\@autobreak@linelength
+%    \end{macrocode}
+% Adding the next term gives an overfull line. Need a line break.
+%    \begin{macrocode}
+      \edef\@tempa{\the\@autobreak@linetoks}%
+      \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
+        \expandafter{\@tempa\notag\\&}%
+      \@autobreak@linetoks={#1}%
+    \else
+      \@autobreak@addtoks\@autobreak@linetoks{#1}%
+    \fi
+  \fi
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@addtoks}
+%    \begin{macrocode}
+\def\@autobreak@addtoks#1#2{%
+  #1=\expandafter{\the#1#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@settowidth}
+%    \begin{macrocode}
+\def\@autobreak@settowidth#1#2{%
+  \settowidth#1{$\displaystyle#2$}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</package>
+%    \end{macrocode}
+% \Finale
+\endinput
