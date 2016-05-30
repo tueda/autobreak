@@ -126,11 +126,13 @@ version 2005/12/01 or later.
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-%
 % \GetFileInfo{\jobname.sty}
 %
-% \title{The \textsf{autobreak} package\thanks{This document corresponds
-%        to \textsf{autobreak}~\fileversion, dated \filedate.}}
+% \providecommand\env[1]{\texttt{#1}}
+% \providecommand\pkg[1]{\textsf{#1}}
+%
+% \title{The \pkg{autobreak} package\thanks{This document corresponds
+%        to \pkg{autobreak}~\fileversion, dated \filedate.}}
 % \author{Takahiro Ueda \\ \texttt{tueda@nikhef.nl}}
 %
 % \date{29 May 2016}
@@ -153,207 +155,207 @@ version 2005/12/01 or later.
 % problem:
 % \begin{align}
 % \begin{autobreak}
-% \zeta(2) = \\
-% 1 \\
-% + \frac{1}{4} \\
-% + \frac{1}{9} \\
-% + \frac{1}{16} \\
-% + \frac{1}{25} \\
-% + \frac{1}{36} \\
-% + \frac{1}{49} \\
-% + \frac{1}{64} \\
-% + \frac{1}{81} \\
-% + \frac{1}{100} \\
-% + \frac{1}{121} \\
-% + \frac{1}{144} \\
-% + \frac{1}{169} \\
-% + \frac{1}{196} \\
-% + \frac{1}{225} \\
-% + \frac{1}{256} \\
-% + \frac{1}{289} \\
-% + \frac{1}{324} \\
-% + \frac{1}{361} \\
-% + \frac{1}{400} \\
-% + \frac{1}{441} \\
-% + \frac{1}{484} \\
-% + \frac{1}{529} \\
-% + \frac{1}{576} \\
-% + \frac{1}{625} \\
-% + \frac{1}{676} \\
-% + \frac{1}{729} \\
-% + \frac{1}{784} \\
-% + \frac{1}{841} \\
-% + \frac{1}{900} \\
-% + \frac{1}{961} \\
-% + \frac{1}{1024} \\
-% + \frac{1}{1089} \\
-% + \frac{1}{1156} \\
-% + \frac{1}{1225} \\
-% + \frac{1}{1296} \\
-% + \frac{1}{1369} \\
-% + \frac{1}{1444} \\
-% + \frac{1}{1521} \\
-% + \frac{1}{1600} \\
-% + \frac{1}{1681} \\
-% + \frac{1}{1764} \\
-% + \frac{1}{1849} \\
-% + \frac{1}{1936} \\
-% + \frac{1}{2025} \\
-% + \frac{1}{2116} \\
-% + \frac{1}{2209} \\
-% + \frac{1}{2304} \\
-% + \frac{1}{2401} \\
-% + \frac{1}{2500} \\
-% + \frac{1}{2601} \\
-% + \frac{1}{2704} \\
-% + \frac{1}{2809} \\
-% + \frac{1}{2916} \\
-% + \frac{1}{3025} \\
-% + \frac{1}{3136} \\
-% + \frac{1}{3249} \\
-% + \frac{1}{3364} \\
-% + \frac{1}{3481} \\
-% + \frac{1}{3600} \\
-% + \frac{1}{3721} \\
-% + \frac{1}{3844} \\
-% + \frac{1}{3969} \\
-% + \frac{1}{4096} \\
-% + \frac{1}{4225} \\
-% + \frac{1}{4356} \\
-% + \frac{1}{4489} \\
-% + \frac{1}{4624} \\
-% + \frac{1}{4761} \\
-% + \frac{1}{4900} \\
-% + \frac{1}{5041} \\
-% + \frac{1}{5184} \\
-% + \frac{1}{5329} \\
-% + \frac{1}{5476} \\
-% + \frac{1}{5625} \\
-% + \frac{1}{5776} \\
-% + \frac{1}{5929} \\
-% + \frac{1}{6084} \\
-% + \frac{1}{6241} \\
-% + \frac{1}{6400} \\
-% + \frac{1}{6561} \\
-% + \frac{1}{6724} \\
-% + \frac{1}{6889} \\
-% + \frac{1}{7056} \\
-% + \frac{1}{7225} \\
-% + \frac{1}{7396} \\
-% + \frac{1}{7569} \\
-% + \frac{1}{7744} \\
-% + \frac{1}{7921} \\
-% + \frac{1}{8100} \\
-% + \frac{1}{8281} \\
-% + \frac{1}{8464} \\
-% + \frac{1}{8649} \\
-% + \frac{1}{8836} \\
-% + \frac{1}{9025} \\
-% + \frac{1}{9216} \\
-% + \frac{1}{9409} \\
-% + \frac{1}{9604} \\
-% + \frac{1}{9801} \\
-% + \frac{1}{10000} \\
-% + \frac{1}{10201} \\
-% + \frac{1}{10404} \\
-% + \frac{1}{10609} \\
-% + \frac{1}{10816} \\
-% + \frac{1}{11025} \\
-% + \frac{1}{11236} \\
-% + \frac{1}{11449} \\
-% + \frac{1}{11664} \\
-% + \frac{1}{11881} \\
-% + \frac{1}{12100} \\
-% + \frac{1}{12321} \\
-% + \frac{1}{12544} \\
-% + \frac{1}{12769} \\
-% + \frac{1}{12996} \\
-% + \frac{1}{13225} \\
-% + \frac{1}{13456} \\
-% + \frac{1}{13689} \\
-% + \frac{1}{13924} \\
-% + \frac{1}{14161} \\
-% + \frac{1}{14400} \\
-% + \frac{1}{14641} \\
-% + \frac{1}{14884} \\
-% + \frac{1}{15129} \\
-% + \frac{1}{15376} \\
-% + \frac{1}{15625} \\
-% + \frac{1}{15876} \\
-% + \frac{1}{16129} \\
-% + \frac{1}{16384} \\
-% + \frac{1}{16641} \\
-% + \frac{1}{16900} \\
-% + \frac{1}{17161} \\
-% + \frac{1}{17424} \\
-% + \frac{1}{17689} \\
-% + \frac{1}{17956} \\
-% + \frac{1}{18225} \\
-% + \frac{1}{18496} \\
-% + \frac{1}{18769} \\
-% + \frac{1}{19044} \\
-% + \frac{1}{19321} \\
-% + \frac{1}{19600} \\
-% + \frac{1}{19881} \\
-% + \frac{1}{20164} \\
-% + \frac{1}{20449} \\
-% + \frac{1}{20736} \\
-% + \frac{1}{21025} \\
-% + \frac{1}{21316} \\
-% + \frac{1}{21609} \\
-% + \frac{1}{21904} \\
-% + \frac{1}{22201} \\
-% + \frac{1}{22500} \\
-% + \frac{1}{22801} \\
-% + \frac{1}{23104} \\
-% + \frac{1}{23409} \\
-% + \frac{1}{23716} \\
-% + \frac{1}{24025} \\
-% + \frac{1}{24336} \\
-% + \frac{1}{24649} \\
-% + \frac{1}{24964} \\
-% + \frac{1}{25281} \\
-% + \frac{1}{25600} \\
-% + \frac{1}{25921} \\
-% + \frac{1}{26244} \\
-% + \frac{1}{26569} \\
-% + \frac{1}{26896} \\
-% + \frac{1}{27225} \\
-% + \frac{1}{27556} \\
-% + \frac{1}{27889} \\
-% + \frac{1}{28224} \\
-% + \frac{1}{28561} \\
-% + \frac{1}{28900} \\
-% + \frac{1}{29241} \\
-% + \frac{1}{29584} \\
-% + \frac{1}{29929} \\
-% + \frac{1}{30276} \\
-% + \frac{1}{30625} \\
-% + \frac{1}{30976} \\
-% + \frac{1}{31329} \\
-% + \frac{1}{31684} \\
-% + \frac{1}{32041} \\
-% + \frac{1}{32400} \\
-% + \frac{1}{32761} \\
-% + \frac{1}{33124} \\
-% + \frac{1}{33489} \\
-% + \frac{1}{33856} \\
-% + \frac{1}{34225} \\
-% + \frac{1}{34596} \\
-% + \frac{1}{34969} \\
-% + \frac{1}{35344} \\
-% + \frac{1}{35721} \\
-% + \frac{1}{36100} \\
-% + \frac{1}{36481} \\
-% + \frac{1}{36864} \\
-% + \frac{1}{37249} \\
-% + \frac{1}{37636} \\
-% + \frac{1}{38025} \\
-% + \frac{1}{38416} \\
-% + \frac{1}{38809} \\
-% + \frac{1}{39204} \\
-% + \frac{1}{39601} \\
-% + \frac{1}{40000} \\
+% \zeta(2) =
+% 1
+% + \frac{1}{4}
+% + \frac{1}{9}
+% + \frac{1}{16}
+% + \frac{1}{25}
+% + \frac{1}{36}
+% + \frac{1}{49}
+% + \frac{1}{64}
+% + \frac{1}{81}
+% + \frac{1}{100}
+% + \frac{1}{121}
+% + \frac{1}{144}
+% + \frac{1}{169}
+% + \frac{1}{196}
+% + \frac{1}{225}
+% + \frac{1}{256}
+% + \frac{1}{289}
+% + \frac{1}{324}
+% + \frac{1}{361}
+% + \frac{1}{400}
+% + \frac{1}{441}
+% + \frac{1}{484}
+% + \frac{1}{529}
+% + \frac{1}{576}
+% + \frac{1}{625}
+% + \frac{1}{676}
+% + \frac{1}{729}
+% + \frac{1}{784}
+% + \frac{1}{841}
+% + \frac{1}{900}
+% + \frac{1}{961}
+% + \frac{1}{1024}
+% + \frac{1}{1089}
+% + \frac{1}{1156}
+% + \frac{1}{1225}
+% + \frac{1}{1296}
+% + \frac{1}{1369}
+% + \frac{1}{1444}
+% + \frac{1}{1521}
+% + \frac{1}{1600}
+% + \frac{1}{1681}
+% + \frac{1}{1764}
+% + \frac{1}{1849}
+% + \frac{1}{1936}
+% + \frac{1}{2025}
+% + \frac{1}{2116}
+% + \frac{1}{2209}
+% + \frac{1}{2304}
+% + \frac{1}{2401}
+% + \frac{1}{2500}
+% + \frac{1}{2601}
+% + \frac{1}{2704}
+% + \frac{1}{2809}
+% + \frac{1}{2916}
+% + \frac{1}{3025}
+% + \frac{1}{3136}
+% + \frac{1}{3249}
+% + \frac{1}{3364}
+% + \frac{1}{3481}
+% + \frac{1}{3600}
+% + \frac{1}{3721}
+% + \frac{1}{3844}
+% + \frac{1}{3969}
+% + \frac{1}{4096}
+% + \frac{1}{4225}
+% + \frac{1}{4356}
+% + \frac{1}{4489}
+% + \frac{1}{4624}
+% + \frac{1}{4761}
+% + \frac{1}{4900}
+% + \frac{1}{5041}
+% + \frac{1}{5184}
+% + \frac{1}{5329}
+% + \frac{1}{5476}
+% + \frac{1}{5625}
+% + \frac{1}{5776}
+% + \frac{1}{5929}
+% + \frac{1}{6084}
+% + \frac{1}{6241}
+% + \frac{1}{6400}
+% + \frac{1}{6561}
+% + \frac{1}{6724}
+% + \frac{1}{6889}
+% + \frac{1}{7056}
+% + \frac{1}{7225}
+% + \frac{1}{7396}
+% + \frac{1}{7569}
+% + \frac{1}{7744}
+% + \frac{1}{7921}
+% + \frac{1}{8100}
+% + \frac{1}{8281}
+% + \frac{1}{8464}
+% + \frac{1}{8649}
+% + \frac{1}{8836}
+% + \frac{1}{9025}
+% + \frac{1}{9216}
+% + \frac{1}{9409}
+% + \frac{1}{9604}
+% + \frac{1}{9801}
+% + \frac{1}{10000}
+% + \frac{1}{10201}
+% + \frac{1}{10404}
+% + \frac{1}{10609}
+% + \frac{1}{10816}
+% + \frac{1}{11025}
+% + \frac{1}{11236}
+% + \frac{1}{11449}
+% + \frac{1}{11664}
+% + \frac{1}{11881}
+% + \frac{1}{12100}
+% + \frac{1}{12321}
+% + \frac{1}{12544}
+% + \frac{1}{12769}
+% + \frac{1}{12996}
+% + \frac{1}{13225}
+% + \frac{1}{13456}
+% + \frac{1}{13689}
+% + \frac{1}{13924}
+% + \frac{1}{14161}
+% + \frac{1}{14400}
+% + \frac{1}{14641}
+% + \frac{1}{14884}
+% + \frac{1}{15129}
+% + \frac{1}{15376}
+% + \frac{1}{15625}
+% + \frac{1}{15876}
+% + \frac{1}{16129}
+% + \frac{1}{16384}
+% + \frac{1}{16641}
+% + \frac{1}{16900}
+% + \frac{1}{17161}
+% + \frac{1}{17424}
+% + \frac{1}{17689}
+% + \frac{1}{17956}
+% + \frac{1}{18225}
+% + \frac{1}{18496}
+% + \frac{1}{18769}
+% + \frac{1}{19044}
+% + \frac{1}{19321}
+% + \frac{1}{19600}
+% + \frac{1}{19881}
+% + \frac{1}{20164}
+% + \frac{1}{20449}
+% + \frac{1}{20736}
+% + \frac{1}{21025}
+% + \frac{1}{21316}
+% + \frac{1}{21609}
+% + \frac{1}{21904}
+% + \frac{1}{22201}
+% + \frac{1}{22500}
+% + \frac{1}{22801}
+% + \frac{1}{23104}
+% + \frac{1}{23409}
+% + \frac{1}{23716}
+% + \frac{1}{24025}
+% + \frac{1}{24336}
+% + \frac{1}{24649}
+% + \frac{1}{24964}
+% + \frac{1}{25281}
+% + \frac{1}{25600}
+% + \frac{1}{25921}
+% + \frac{1}{26244}
+% + \frac{1}{26569}
+% + \frac{1}{26896}
+% + \frac{1}{27225}
+% + \frac{1}{27556}
+% + \frac{1}{27889}
+% + \frac{1}{28224}
+% + \frac{1}{28561}
+% + \frac{1}{28900}
+% + \frac{1}{29241}
+% + \frac{1}{29584}
+% + \frac{1}{29929}
+% + \frac{1}{30276}
+% + \frac{1}{30625}
+% + \frac{1}{30976}
+% + \frac{1}{31329}
+% + \frac{1}{31684}
+% + \frac{1}{32041}
+% + \frac{1}{32400}
+% + \frac{1}{32761}
+% + \frac{1}{33124}
+% + \frac{1}{33489}
+% + \frac{1}{33856}
+% + \frac{1}{34225}
+% + \frac{1}{34596}
+% + \frac{1}{34969}
+% + \frac{1}{35344}
+% + \frac{1}{35721}
+% + \frac{1}{36100}
+% + \frac{1}{36481}
+% + \frac{1}{36864}
+% + \frac{1}{37249}
+% + \frac{1}{37636}
+% + \frac{1}{38025}
+% + \frac{1}{38416}
+% + \frac{1}{38809}
+% + \frac{1}{39204}
+% + \frac{1}{39601}
+% + \frac{1}{40000}
 % + \dots .
 % \end{autobreak}
 % \end{align}
@@ -374,24 +376,24 @@ version 2005/12/01 or later.
 % or reusing existing equations into another document with a different
 % format.
 %
-% The goal of the \textsf{autobreak} package is to give a reasonable
+% The goal of the \pkg{autobreak} package is to give a reasonable
 % solution for (semi-) automatic line breaking of long equations within
 % \LaTeX{}^^A
 % \footnote{^^A
-%   There is another package \textsf{breqn}, which adopts a more
-%   automatic fashion, leading to a more complicated code structure.
+%   There is another package \pkg{breqn}, which adopts a more automatic
+%   fashion and may be useful for more complicated line breaks.
 % }.
 %
 % \section{Usage}
 %
-% The \textsf{autobreak} package is supposed to be used together with
-% the \textsf{amsmath} package.
+% The \pkg{autobreak} package is supposed to be used together with the
+% \pkg{amsmath} package.
 % \begin{verbatim}
 %     \usepackage{amsmath}
 %     \usepackage{autobreak}
 % \end{verbatim}
-% For long equations over multiple pages, you might use
-% \cs{allowdisplaybreaks}:
+% For long equations over multiple pages, you might want to use
+% \cs{allowdisplaybreaks} of \pkg{amsmath} package in the preamble.
 % \begin{verbatim}
 %     \allowdisplaybreaks
 % \end{verbatim}
@@ -403,17 +405,17 @@ version 2005/12/01 or later.
 %   \begin{verbatim}
 %     \begin{align}
 %       \begin{autobreak}
-%         \zeta(3) = \\
-%         1 \\
-%         + \frac{1}{8} \\
-%         + \frac{1}{27} \\
-%         + \frac{1}{64} \\
-%         + \frac{1}{125} \\
-%         + \frac{1}{216} \\
-%         + \frac{1}{343} \\
-%         + \frac{1}{512} \\
-%         + \frac{1}{729} \\
-%         + \frac{1}{1000} \\
+%         \zeta(3) =
+%         1
+%         + \frac{1}{8}
+%         + \frac{1}{27}
+%         + \frac{1}{64}
+%         + \frac{1}{125}
+%         + \frac{1}{216}
+%         + \frac{1}{343}
+%         + \frac{1}{512}
+%         + \frac{1}{729}
+%         + \frac{1}{1000}
 %         + \dots .
 %       \end{autobreak}
 %     \end{align}
@@ -422,17 +424,17 @@ version 2005/12/01 or later.
 % \begin{minipage}[t]{0.45\linewidth}
 %     \begin{align}
 %       \begin{autobreak}
-%         \zeta(3) = \\
-%         1 \\
-%         + \frac{1}{8} \\
-%         + \frac{1}{27} \\
-%         + \frac{1}{64} \\
-%         + \frac{1}{125} \\
-%         + \frac{1}{216} \\
-%         + \frac{1}{343} \\
-%         + \frac{1}{512} \\
-%         + \frac{1}{729} \\
-%         + \frac{1}{1000} \\
+%         \zeta(3) =
+%         1
+%         + \frac{1}{8}
+%         + \frac{1}{27}
+%         + \frac{1}{64}
+%         + \frac{1}{125}
+%         + \frac{1}{216}
+%         + \frac{1}{343}
+%         + \frac{1}{512}
+%         + \frac{1}{729}
+%         + \frac{1}{1000}
 %         + \dots .
 %       \end{autobreak}
 %     \end{align}
@@ -449,74 +451,160 @@ version 2005/12/01 or later.
 %<*package>
 %    \end{macrocode}
 %
-% We ensure that we can use \cs{collect@body}, which should be defined
-% in the \textsf{amsmath} package. Otherwise, it is available in the
-% \textsf{environ} package.
+% \subsection{Hacking \texttt{amsmath}}
+%
 %    \begin{macrocode}
 \RequirePackage{amsmath}
-\@ifundefined{collect@body}{
-  \RequirePackage{environ}
-}{}
 %    \end{macrocode}
 %
-% \begin{macro}{@autobreak@alltoks}
-% \begin{macro}{@autobreak@linetoks}
-% \begin{macro}{@autobreak@lhslength}
-% \begin{macro}{@autobreak@rhslength}
-% \begin{macro}{@autobreak@linelength}
+% \begin{macro}{if@autobreak@newlinedef}
 %    \begin{macrocode}
-\newtoks\@autobreak@alltoks
-\newtoks\@autobreak@linetoks
-\newdimen\@autobreak@lhslength
-\newdimen\@autobreak@rhslength
-\newdimen\@autobreak@linelength
+\newif\if@autobreak@newlinedef
+\@autobreak@newlinedeffalse
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{@autobreak@newlinedef}
+% Installs the definition of |^^M| as a space. This is virtually
+% harmless in math mode.
+%    \begin{macrocode}
+\begingroup
+  \catcode`\^^M=\active
+  \gdef\@autobreak@newlinedef{%
+    \def^^M{ }%
+    \@autobreak@newlinedeftrue
+  }
+\endgroup
+%    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{collect@body}
+% We need to override \cs{collect@body} such that it keeps |^^M|.
+%    \begin{macrocode}
+\def\collect@body#1{%
+  \@envbody={\expandafter#1\expandafter{\the\@envbody}}%
+  \edef\process@envbody{%
+    \the\@envbody\noexpand\end{\@currenvir}%
+  }%
+  \@envbody=\@emptytoks
+  \def\begin@stack{b}%
+  \begingroup
+%    \end{macrocode}
+% Actually, the following three lines need to be inserted to the
+% original code.
+%    \begin{macrocode}
+    \if@autobreak@newlinedef
+      \catcode`\^^M=\active
+    \fi
+    \expandafter\let\csname\@currenvir\endcsname=\collect@@body
+    \edef\process@envbody{%
+      \expandafter\noexpand\csname\@currenvir\endcsname
+    }%
+    \process@envbody
+}
+%    \end{macrocode}
 % \end{macro}
+%
+% \begin{environment}{align}
+% Hack \env{align} of \pkg{amsmath}.
+%    \begin{macrocode}
+\let\@autobreak@oldstart@align=\start@align
+\def\start@align{%
+  \@autobreak@newlinedef
+  \@autobreak@oldstart@align
+}
+%    \end{macrocode}
+% \end{environment}
+%
+% \subsection{Registers and parameters}
+%
+% \begin{macro}{@autobreak@alltoks}
+% The token register to store the whole result of \env{autobreak}.
+%    \begin{macrocode}
+\newtoks\@autobreak@alltoks
+%    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{@autobreak@linetoks}
+% The token register for the current line.
+%    \begin{macrocode}
+\newtoks\@autobreak@linetoks
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@lhslength}
+% The length of the left-hand side.
+%    \begin{macrocode}
+\newdimen\@autobreak@lhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@rhslength}
+% The length of the right-hand side.
+%    \begin{macrocode}
+\newdimen\@autobreak@rhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@maxrhslength}
+% The maximum length that right-hand side can occupy.
+%    \begin{macrocode}
+\newdimen\@autobreak@maxrhslength
+%    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{@autobreak@sep}
-% The sum of the space needed for the both sides of |&|.
+% The additional space needed for putting the left-hand side and the
+% right-hand side in one line, in other words, the separation for |&|.
 % TODO: how can we know the exact extra space to be inserted?
 %    \begin{macrocode}
 \def\@autobreak@sp{7\p@}
 %    \end{macrocode}
 % \end{macro}
 %
+% \subsection{\texttt{autobreak} environment}
+%
 % \begin{environment}{autobreak}
+% Checks if we are in \env{align} (and \cs{@autobreak@newlinedef} is
+% applied) and collect the body via \cs{collect@body}.
 %    \begin{macrocode}
 \newenvironment{autobreak}{%
+  \if@autobreak@newlinedef
+  \else
+    \PackageError{autobreak}{%
+      autobreak is not allowed here
+    }{%
+      Use autobreak inside align.
+    }%
+  \fi
   \collect@body\@autobreak
 }{}
 %    \end{macrocode}
 % \end{environment}
 %
 % \begin{macro}{@autobreak}
+% Called from \cs{collect@body}. The parameter |#1| is the whole body.
+% It takes also |#2| and |#3|, which are always \cs{end} and
+% |autobreak|, to remove them from the successive tokens.
 %    \begin{macrocode}
 \def\@autobreak#1#2#3{%
-  \end{autobreak}%
-  \@autobreak@init
-  \@autobreak@scanline#1\\\@autobreak@end
-}
 %    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@scanline}
+% First, close the group of \env{autobreak}.
 %    \begin{macrocode}
-\def\@autobreak@scanline#1\\{%
-  \@ifnextchar\@autobreak@end{%
-    \@autobreak@processline{#1}%
-  }{%
-    \@autobreak@processline{#1}%
-    \@autobreak@scanline
-  }%
+  \end{autobreak}%
+%    \end{macrocode}
+% Then parse the given body of the environment and construct lines to be
+% passed to \env{align}.
+%    \begin{macrocode}
+  \@autobreak@init
+  \@autobreak@scanline#1
+  \@autobreak@end
 }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{@autobreak@init}
+% Initialization.
 %    \begin{macrocode}
 \def\@autobreak@init{%
   \@autobreak@alltoks={}%
@@ -527,6 +615,7 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@end}
+% Finalization. It generates the whole lines in one go.
 %    \begin{macrocode}
 \def\@autobreak@end{%
   \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
@@ -536,29 +625,59 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{@autobreak@scanline}
+% Takes a line. Here a line ends with |^^M|.
+%    \begin{macrocode}
+\begingroup
+  \catcode`\^^M=\active
+  \gdef\@autobreak@scanline#1^^M{%
+%    \end{macrocode}
+% Until \cs{@autobreak@end} appears as the next token, we repeatedly
+% continue to read a line. In the both cases, the current line is passed
+% to \cs{@autobreak@processline}.
+%    \begin{macrocode}
+    \@ifnextchar\@autobreak@end{%
+      \@autobreak@processline{#1}%
+    }{%
+      \@autobreak@processline{#1}%
+%    \end{macrocode}
+% The following line has to have |%| at the end.
+%    \begin{macrocode}
+      \@autobreak@scanline%
+    }%
+  }
+\endgroup
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{@autobreak@processline}
+% Each line of \cs{autobreak@scanline} should be regarded as a `block'
+% in the equation. The first block (typically the left-hand side $+$
+% `=') determines the indentation for the successive lines. From the
+% second block, try to append the block to the end of line and insert
+% a line break if it does not fit in a line.
 %    \begin{macrocode}
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhslength=\z@
 %    \end{macrocode}
-% For the LHS term.
+% For the first block.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@lhslength{#1}%
     \ifdim\@autobreak@lhslength>\z@
-      \@autobreak@linelength=\linewidth
-      \advance\@autobreak@linelength by -\@autobreak@lhslength
-      \advance\@autobreak@linelength by -\@autobreak@sp
+      \@autobreak@maxrhslength=\linewidth
+      \advance\@autobreak@maxrhslength by -\@autobreak@lhslength
+      \advance\@autobreak@maxrhslength by -\@autobreak@sp
       \@autobreak@alltoks={#1{}&}%
     \fi
   \else
 %    \end{macrocode}
-% For a term in the RHS.
+% For the rest.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@rhslength
       {\the\@autobreak@linetoks#1}%
-    \ifdim\@autobreak@rhslength>\@autobreak@linelength
+    \ifdim\@autobreak@rhslength>\@autobreak@maxrhslength
 %    \end{macrocode}
-% Adding the next term gives an overfull line. Need a line break.
+% Adding the next block gives an overfull line. Need a line break.
 %    \begin{macrocode}
       \edef\@tempa{\the\@autobreak@linetoks}%
       \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
@@ -573,6 +692,7 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@addtoks}
+% Append |#2| to the token register |#1|.
 %    \begin{macrocode}
 \def\@autobreak@addtoks#1#2{%
   #1=\expandafter{\the#1#2}%
@@ -581,6 +701,7 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@settowidth}
+% Same as \cs{settowidth} but in math mode.
 %    \begin{macrocode}
 \def\@autobreak@settowidth#1#2{%
   \settowidth#1{$\displaystyle#2$}%
