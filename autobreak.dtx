@@ -96,13 +96,16 @@ version 2005/12/01 or later.
 \documentclass{ltxdoc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[numbered]{hypdoc}
-\usepackage{\jobname}
+\usepackage{hypdoc}
+\usepackage{autobreak}
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
 
 \allowdisplaybreaks
+
+% The default value of IndexColumns=3 never fits in pages.
+\setcounter{IndexColumns}{2}
 
 \providecommand\env[1]{\texttt{#1}}
 \providecommand\pkg[1]{\textsf{#1}}
@@ -185,6 +188,8 @@ version 2005/12/01 or later.
 % \maketitle
 %
 % \changes{v0.10}{2016/05/29}{Initial version}
+%
+% \tableofcontents
 %
 % \section{Introduction}
 %
@@ -432,14 +437,22 @@ version 2005/12/01 or later.
 % \section{Usage}
 %
 % The \pkg{autobreak} package is supposed to be used together with the
-% \pkg{amsmath} package.
+% \pkg{amsmath} package^^A
+% \footnote{^^A
+%   \url{https://www.ctan.org/pkg/amsmath}.
+% }^^A
+% \footnote{^^A
+%   Actually \pkg{autobreak} internally loads \pkg{amsmath}, but it is
+%   still a good practice to explicitly include all packages providing
+%   macros used in your document.
+% },
 % \begin{example*}
 %   \usepackage{amsmath}
 %   \usepackage{autobreak}
 % \end{example*}
 % When your document contains long equations over multiple pages,
 % you might want to use \cs{allowdisplaybreaks} of \pkg{amsmath} package
-% in the preamble.
+% in the preamble,
 % \begin{example*}
 %   \allowdisplaybreaks
 % \end{example*}
@@ -538,6 +551,39 @@ version 2005/12/01 or later.
 %     \end{autobreak} .  % Even just a "." can be problematic.
 %   \end{align}
 %   % May give overfull line warnings
+% \end{example*}
+%
+% One may want to separate long formulae from the main document file to
+% other files and include them via \cs{input}\marg{file}, for example,
+% \begin{example*}
+%   \begin{align}
+%     \begin{autobreak}
+%       \input{longeqn.inc}  % It works!
+%     \end{autobreak}
+%   \end{align}
+%
+%   \begin{align}
+%     \begin{autobreak}
+%       lhs =
+%       \input{longrhs.inc}  % It also works!
+%       .
+%     \end{autobreak}
+%   \end{align}
+% \end{example*}
+% The current version of \env{autobreak} supports these cases: the file
+% content of \cs{input}\marg{file} is expanded before parsing lines,
+% with the help of the \pkg{catchfile} package^^A
+% \footnote{%
+%   \url{https://www.ctan.org/pkg/catchfile}.
+% },
+% when it appears in the beginning of each line. But it does not support
+% \cs{input}\marg{file} in the middle of the lines:
+% \begin{example*}
+%   \begin{align}
+%     \begin{autobreak}
+%       x + \input{longexpr.inc}  % Sorry, it does not work.
+%     \end{autobreak}
+%   \end{align}
 % \end{example*}
 %
 % \section{Implementation}
@@ -806,8 +852,8 @@ version 2005/12/01 or later.
 % the file content and \env{autobreak} treats new lines in it correctly.
 % But it needs more work. Because handling of \cs{input} in the middle
 % of the lines is rather involved, for now we support only \cs{input} at
-% the beginning of each line (what sane people usually do). This can be
-% done via the \pkg{catchfile} package.
+% the beginning of each line (which is what sane people usually do).
+% This can be done via the \pkg{catchfile} package.
 %    \begin{macrocode}
 \IfFileExists{catchfile.sty}{
   \RequirePackage{catchfile}
