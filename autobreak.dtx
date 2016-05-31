@@ -195,7 +195,7 @@ version 2005/12/01 or later.
 %   One of the `worst' equations can be found in the appendices of
 %   \url{http://arxiv.org/abs/hep-ph/0504242}.
 % }
-% formula of explicitly
+% equation of explicitly
 % writing down the first 200 terms in the sum of the well-known Basel
 % problem:
 % \begin{align}
@@ -411,8 +411,8 @@ version 2005/12/01 or later.
 % and would have the form of a sum of many terms in which each
 % term is short.
 %
-% Then, the question is how to break long equations in such a way that
-% the equations do not make any overfull lines. Certainly, one can
+% Then, the question is how to break long formulae in such a way that
+% the expressions do not make any overfull lines. Certainly, one can
 % attempt to manually insert line breaks by trial and error, checking
 % whether \LaTeX{} warns overfull lines, and this process could be
 % automatized by external scripts at some extent. A shortcoming of such
@@ -422,11 +422,11 @@ version 2005/12/01 or later.
 % format.
 %
 % The goal of the \pkg{autobreak} package is to give a reasonable
-% solution for (semi-) automatic line breaking of long equations within
+% solution for (semi-) automatic line breaking of long formulae within
 % \LaTeX{}^^A
 % \footnote{^^A
 %   There is another package \pkg{breqn}, which adopts a more automatic
-%   fashion and may be useful for more complicated line breaks.
+%   fashion and may be useful for more complicated line breaking.
 % }.
 %
 % \section{Usage}
@@ -445,8 +445,8 @@ version 2005/12/01 or later.
 % \end{example*}
 %
 % \DescribeEnv{autobreak}
-% This environment is used for breaking lines in long equations in the
-% \env{align} environment of \pkg{amsmath}.
+% The \env{autobreak} environment is used for breaking lines in long
+% formulae in the \env{align} environment of \pkg{amsmath}.
 % \begin{example}
 %   \begin{align}
 %     \begin{autobreak}
@@ -465,7 +465,7 @@ version 2005/12/01 or later.
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
-% The magic happens from the fact that \env{autobreak} interprets
+% The magic happens from the simple fact that \env{autobreak} interprets
 % all new line characters appearing between |\begin{autobreaK}| and
 % |\end{autobreak}| as \textit{breakable points}, at which any line
 % breaks can be logically inserted. To be more exact, the first
@@ -484,6 +484,9 @@ version 2005/12/01 or later.
 %       \NumberedBox{5}
 %       \NumberedBox{6}
 %       \NumberedBox{7}
+%       \NumberedBox{8}
+%       \NumberedBox{9}
+%       \NumberedBox{10}
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
@@ -501,6 +504,7 @@ version 2005/12/01 or later.
 %   \begin{align}
 %     \begin{autobreak}
 %       x =
+%       % A problematic line break.
 %       \frac{1}
 %       {2} .
 %     \end{autobreak}
@@ -511,7 +515,7 @@ version 2005/12/01 or later.
 %   ! Missing } inserted.
 %   <inserted text>
 %                   }
-%   l.7   \end{align}
+%   l.8   \end{align}
 % \end{example*}
 %
 % \StopEventually{^^A
@@ -520,11 +524,11 @@ version 2005/12/01 or later.
 % }
 %
 % The \env{autobreak} environment uses \cs{linewidth} as the maximum
-% width that equations in its body can occupy. There is no way for
-% \env{autobreak} to know how much other equations occupy the space
-% outside of it. Therefore it may fail to determine the correct width
-% that it can use when there are equations outside \env{autobreak} and
-% then \LaTeX{} gives overfull lines warnings:
+% width that expressions in its body can occupy. There is no way for
+% \env{autobreak} to know how much other formulae consume the space
+% outside of it. Therefore it fails to determine the adequate maximum
+% width when there are expressions outside \env{autobreak} and
+% then \LaTeX{} gives overfull line warnings:
 % \begin{example*}
 %   \begin{align}
 %     \text{some stuff outside autobreak}
@@ -542,7 +546,7 @@ version 2005/12/01 or later.
 %<*package>
 %    \end{macrocode}
 %
-% \subsection{Registers and parameters}
+% \subsection{Registers and constants}
 %
 % \begin{macro}{@autobreak@alltoks}
 % The token register to store the whole result of \env{autobreak}.
@@ -612,6 +616,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 %
 % \begin{macro}{if@autobreak@newlinedef}
+% The switch to be turned on when \cs{@autobreak@newlinedef} applies.
 %    \begin{macrocode}
 \newif\if@autobreak@newlinedef
 \@autobreak@newlinedeffalse
@@ -675,7 +680,7 @@ version 2005/12/01 or later.
 %
 % \begin{environment}{autobreak}
 % Checks if we are in \env{align} (and \cs{@autobreak@newlinedef} is
-% applied) and collect the body via \cs{collect@body}.
+% applied) and collects its body via \cs{collect@body}.
 %    \begin{macrocode}
 \newenvironment{autobreak}{%
   \if@autobreak@newlinedef
@@ -760,11 +765,11 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@processline}
-% Each line of \cs{autobreak@scanline} should be regarded as a `block'
+% Each line from \cs{autobreak@scanline} should be regarded as a `block'
 % in the equation. The first block (typically the left-hand side $+$
 % `=') determines the indentation for the successive lines. From the
-% second block, try to append the block to the end of line and insert
-% a line break if it does not fit in a line.
+% second block, try to append the block to the end of the line and
+% insert a line break if it does not fit in a line.
 %    \begin{macrocode}
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhslength=\z@
@@ -786,7 +791,7 @@ version 2005/12/01 or later.
     \fi
   \else
 %    \end{macrocode}
-% For the rest.
+% For the rest of the blocks.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@rhslength
       {\the\@autobreak@linetoks#1}%
@@ -807,7 +812,7 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@addtoks}
-% Append |#2| to the token register |#1|.
+% Appends |#2| to the token register |#1|.
 %    \begin{macrocode}
 \def\@autobreak@addtoks#1#2{%
   #1=\expandafter{\the#1#2}%
