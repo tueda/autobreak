@@ -6,7 +6,7 @@ all:
 	pdflatex autobreak.dtx
 
 mostlyclean:
-	rm -f autobreak.{aux,glo,gls,hd,idx,ilg,ind,log,out,log}
+	rm -f autobreak.{aux,glo,gls,hd,idx,ilg,ind,log,out,tmp}
 
 clean: mostlyclean
 	rm -f autobreak.{ins,pdf,sty}

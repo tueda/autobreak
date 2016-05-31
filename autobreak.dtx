@@ -98,10 +98,54 @@ version 2005/12/01 or later.
 \usepackage{lmodern}
 \usepackage[numbered]{hypdoc}
 \usepackage{\jobname}
-\allowdisplaybreaks
 \EnableCrossrefs
 \CodelineIndex
 \RecordChanges
+
+\allowdisplaybreaks
+
+\providecommand\env[1]{\texttt{#1}}
+\providecommand\pkg[1]{\textsf{#1}}
+
+\usepackage{fancyvrb}
+
+\edef\examplefilename{\jobname.tmp}
+
+\newenvironment{example}{%
+  \VerbatimEnvironment
+  \begin{VerbatimOut}[gobble=2]{\examplefilename}%
+}{%
+  \end{VerbatimOut}%
+  \smallskip
+  \noindent
+  \begin{list}{}{}\item
+    \begin{minipage}[t]{0.45\linewidth}%
+      \VerbatimInput{\examplefilename}%
+    \end{minipage}%
+    \begin{minipage}[t]{0.45\linewidth}%
+      \input{\examplefilename}%
+    \end{minipage}%
+  \end{list}%
+  \smallskip
+  \noindent
+}
+
+\newenvironment{example*}{%
+  \VerbatimEnvironment
+  \begin{VerbatimOut}[gobble=2]{\examplefilename}%
+}{%
+  \end{VerbatimOut}%
+  \smallskip
+  \noindent
+  \begin{list}{}{}\item
+    \begin{minipage}[t]{0.95\linewidth}%
+      \VerbatimInput{\examplefilename}%
+    \end{minipage}%
+  \end{list}%
+  \smallskip
+  \noindent
+}
+
 \begin{document}
   \DocInput{\jobname.dtx}
 \end{document}
@@ -127,9 +171,6 @@ version 2005/12/01 or later.
 %   Right brace   \}     Tilde         \~}
 %
 % \GetFileInfo{\jobname.sty}
-%
-% \providecommand\env[1]{\texttt{#1}}
-% \providecommand\pkg[1]{\textsf{#1}}
 %
 % \title{The \pkg{autobreak} package\thanks{This document corresponds
 %        to \pkg{autobreak}~\fileversion, dated \filedate.}}
@@ -388,57 +429,38 @@ version 2005/12/01 or later.
 %
 % The \pkg{autobreak} package is supposed to be used together with the
 % \pkg{amsmath} package.
-% \begin{verbatim}
-%     \usepackage{amsmath}
-%     \usepackage{autobreak}
-% \end{verbatim}
-% For long equations over multiple pages, you might want to use
-% \cs{allowdisplaybreaks} of \pkg{amsmath} package in the preamble.
-% \begin{verbatim}
-%     \allowdisplaybreaks
-% \end{verbatim}
+% \begin{example*}
+%   \usepackage{amsmath}
+%   \usepackage{autobreak}
+% \end{example*}
+% When your document contains long equations over multiple pages,
+% you might want to use \cs{allowdisplaybreaks} of \pkg{amsmath} package
+% in the preamble.
+% \begin{example*}
+%   \allowdisplaybreaks
+% \end{example*}
 %
 % \DescribeEnv{autobreak}
-% This environment is used for breaking lines in long equations.
-%
-% \begin{minipage}[t]{0.5\linewidth}
-%   \begin{verbatim}
-%     \begin{align}
-%       \begin{autobreak}
-%         \zeta(3) =
-%         1
-%         + \frac{1}{8}
-%         + \frac{1}{27}
-%         + \frac{1}{64}
-%         + \frac{1}{125}
-%         + \frac{1}{216}
-%         + \frac{1}{343}
-%         + \frac{1}{512}
-%         + \frac{1}{729}
-%         + \frac{1}{1000}
-%         + \dots .
-%       \end{autobreak}
-%     \end{align}
-%   \end{verbatim}
-% \end{minipage}
-% \begin{minipage}[t]{0.45\linewidth}
-%     \begin{align}
-%       \begin{autobreak}
-%         \zeta(3) =
-%         1
-%         + \frac{1}{8}
-%         + \frac{1}{27}
-%         + \frac{1}{64}
-%         + \frac{1}{125}
-%         + \frac{1}{216}
-%         + \frac{1}{343}
-%         + \frac{1}{512}
-%         + \frac{1}{729}
-%         + \frac{1}{1000}
-%         + \dots .
-%       \end{autobreak}
-%     \end{align}
-% \end{minipage}
+% This environment is used for breaking lines in long equations in the
+% \env{align} environment of \pkg{amsmath}.
+% \begin{example}
+%   \begin{align}
+%     \begin{autobreak}
+%       \zeta(3) =
+%       1
+%       + \frac{1}{8}
+%       + \frac{1}{27}
+%       + \frac{1}{64}
+%       + \frac{1}{125}
+%       + \frac{1}{216}
+%       + \frac{1}{343}
+%       + \frac{1}{512}
+%       + \frac{1}{729}
+%       + \frac{1}{1000}
+%       + \dots .
+%     \end{autobreak}
+%   \end{align}
+% \end{example}
 %
 % \StopEventually{^^A
 %   \PrintChanges
