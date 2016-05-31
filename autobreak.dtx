@@ -552,6 +552,16 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{@autobreak@newlinechar}
+% The macro representing an active |^^M|.
+%    \begin{macrocode}
+\begingroup
+  \catcode`\^^M=\active
+  \gdef\@autobreak@newlinechar{^^M}
+\endgroup
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Hacking \texttt{amsmath}}
 %
 %    \begin{macrocode}
@@ -653,8 +663,8 @@ version 2005/12/01 or later.
 % passed to \env{align}.
 %    \begin{macrocode}
   \@autobreak@init
-  \@autobreak@scanline#1
-  \@autobreak@end
+  \def\@tempa{\@autobreak@scanline#1}%
+  \expandafter\@tempa\@autobreak@newlinechar\@autobreak@end
 }
 %    \end{macrocode}
 % \end{macro}
