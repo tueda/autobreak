@@ -146,6 +146,10 @@ version 2005/12/01 or later.
   \noindent
 }
 
+\newcommand\NumberedBox[1]{%
+  \, \framebox[28pt]{#1}%
+}
+
 \begin{document}
   \DocInput{\jobname.dtx}
 \end{document}
@@ -458,6 +462,28 @@ version 2005/12/01 or later.
 %       + \frac{1}{729}
 %       + \frac{1}{1000}
 %       + \dots .
+%     \end{autobreak}
+%   \end{align}
+% \end{example}
+% The magic happens from the fact that \env{autobreak} interprets
+% all new line characters appearing between |\begin{autobreaK}| and
+% |\end{autobreak}| as \textit{breakable points}, at which any line
+% breaks can be logically inserted. To be more exact, the first
+% non-empty block, separated from the rest by a new line character,
+% determines the indentation of the successive lines. Then
+% \env{autobreak} tries to fill the line with the rest of the blocks,
+% and puts a line break when they do not fit in a line. This is
+% clarified by the following example:
+% \begin{example}
+%   \begin{align}
+%     \begin{autobreak}
+%       \NumberedBox{1}
+%       \NumberedBox{2}
+%       \NumberedBox{3}
+%       \NumberedBox{4}
+%       \NumberedBox{5}
+%       \NumberedBox{6}
+%       \NumberedBox{7}
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
