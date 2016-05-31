@@ -711,7 +711,8 @@ version 2005/12/01 or later.
 % passed to \env{align}.
 %    \begin{macrocode}
   \@autobreak@init
-  \def\@tempa{\@autobreak@scanline#1}%
+  \def\@tempa{\expandafter\@autobreak@scanline
+    \@autobreak@newlinechar#1}%
   \expandafter\@tempa\@autobreak@newlinechar\@autobreak@end
 }
 %    \end{macrocode}
@@ -757,10 +758,45 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % The following line has to have |%| at the end.
 %    \begin{macrocode}
-      \@autobreak@scanline%
+      \@autobreak@scanline@%
     }%
   }
 \endgroup
+%    \end{macrocode}
+% One may expect \cs{input}\marg{file} in \env{autobreak} is expanded by
+% the file content and \env{autobreak} treats new lines in it correctly.
+% But it needs more work. Because handling of \cs{input} in the middle
+% of the lines is rather involved, for now we support only \cs{input} at
+% the beginning of each line (what sane people usually do). This can be
+% done via the \pkg{catchfile} package.
+%    \begin{macrocode}
+\IfFileExists{catchfile.sty}{
+  \RequirePackage{catchfile}
+  \def\@autobreak@scanline@{%
+    \@ifnextchar\input{%
+      \@autobreak@scanline@@
+    }{%
+      \@autobreak@scanline
+    }%
+  }
+}{
+  \def\@autobreak@scanline@{%
+    \@ifnextchar\input{%
+      \PackageWarning{autobreak}{%
+        Cannot handle new lines in a file via \protect\input,
+        \MessageBreak which requires the catchfile packages
+      }%
+    }%
+    \@autobreak@scanline
+  }
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\@autobreak@scanline@@#1#2{%
+  \CatchFileDef\@tempa{#2}{\catcode`\^^M=\active}%
+  \expandafter\@autobreak@scanline\@tempa
+}
 %    \end{macrocode}
 % \end{macro}
 %
