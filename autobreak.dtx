@@ -488,10 +488,53 @@ version 2005/12/01 or later.
 %   \end{align}
 % \end{example}
 %
+% \section{Caveats}
+%
+% Because \env{autobreak} tries to insert line breaks at any of new line
+% characters, you must not make any new lines at which the line cannot
+% be broken^^A
+% \footnote{^^A
+%   You may put "\%" at the end of the line to avoid a new line.
+% }.
+% For example
+% \begin{example*}
+%   \begin{align}
+%     \begin{autobreak}
+%       x =
+%       \frac{1}
+%       {2} .
+%     \end{autobreak}
+%   \end{align}
+% \end{example*}
+% gives an error in the typesetting:
+% \begin{example*}
+%   ! Missing } inserted.
+%   <inserted text>
+%                   }
+%   l.7   \end{align}
+% \end{example*}
+%
 % \StopEventually{^^A
 %   \PrintChanges
 %   \PrintIndex
 % }
+%
+% The \env{autobreak} environment uses \cs{linewidth} as the maximum
+% width that equations in its body can occupy. There is no way for
+% \env{autobreak} to know how much other equations occupy the space
+% outside of it. Therefore it may fail to determine the correct width
+% that it can use when there are equations outside \env{autobreak} and
+% then \LaTeX{} gives overfull lines warnings:
+% \begin{example*}
+%   \begin{align}
+%     \text{some stuff outside autobreak}
+%     \begin{autobreak}
+%       \text{LHS} =
+%       ...
+%     \end{autobreak} .  % Even just a "." can be problematic.
+%   \end{align}
+%   % May give overfull line warnings
+% \end{example*}
 %
 % \section{Implementation}
 %
