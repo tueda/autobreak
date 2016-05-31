@@ -473,6 +473,59 @@ version 2005/12/01 or later.
 %<*package>
 %    \end{macrocode}
 %
+% \subsection{Registers and parameters}
+%
+% \begin{macro}{@autobreak@alltoks}
+% The token register to store the whole result of \env{autobreak}.
+%    \begin{macrocode}
+\newtoks\@autobreak@alltoks
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@linetoks}
+% The token register for the current line.
+%    \begin{macrocode}
+\newtoks\@autobreak@linetoks
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@lhslength}
+% The length of the current left-hand side.
+%    \begin{macrocode}
+\newdimen\@autobreak@lhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@rhslength}
+% The length of the current right-hand side.
+%    \begin{macrocode}
+\newdimen\@autobreak@rhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@maxlhslength}
+% The maximum length that the left-hand sides occupied.
+%    \begin{macrocode}
+\newdimen\@autobreak@maxlhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@maxrhslength}
+% The maximum length that the right-hand sides can occupy.
+%    \begin{macrocode}
+\newdimen\@autobreak@maxrhslength
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@sep}
+% The additional space needed for putting the left-hand side and the
+% right-hand side in one line, in other words, the separation for |&|.
+% TODO: how can we know the exact extra space to be inserted?
+%    \begin{macrocode}
+\def\@autobreak@sp{7\p@}
+%    \end{macrocode}
+% \end{macro}
+%
 % \subsection{Hacking \texttt{amsmath}}
 %
 %    \begin{macrocode}
@@ -532,57 +585,12 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \let\@autobreak@oldstart@align=\start@align
 \def\start@align{%
+  \@autobreak@maxlhslength=\z@
   \@autobreak@newlinedef
   \@autobreak@oldstart@align
 }
 %    \end{macrocode}
 % \end{environment}
-%
-% \subsection{Registers and parameters}
-%
-% \begin{macro}{@autobreak@alltoks}
-% The token register to store the whole result of \env{autobreak}.
-%    \begin{macrocode}
-\newtoks\@autobreak@alltoks
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@linetoks}
-% The token register for the current line.
-%    \begin{macrocode}
-\newtoks\@autobreak@linetoks
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@lhslength}
-% The length of the left-hand side.
-%    \begin{macrocode}
-\newdimen\@autobreak@lhslength
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@rhslength}
-% The length of the right-hand side.
-%    \begin{macrocode}
-\newdimen\@autobreak@rhslength
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@maxrhslength}
-% The maximum length that right-hand side can occupy.
-%    \begin{macrocode}
-\newdimen\@autobreak@maxrhslength
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{@autobreak@sep}
-% The additional space needed for putting the left-hand side and the
-% right-hand side in one line, in other words, the separation for |&|.
-% TODO: how can we know the exact extra space to be inserted?
-%    \begin{macrocode}
-\def\@autobreak@sp{7\p@}
-%    \end{macrocode}
-% \end{macro}
 %
 % \subsection{\texttt{autobreak} environment}
 %
@@ -682,12 +690,18 @@ version 2005/12/01 or later.
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhslength=\z@
 %    \end{macrocode}
-% For the first block.
+% For the first block. The rest of the length for the right-hand sides
+% is determined from \cs{linewidth} and \cs{@autobreak@maxlhslength}.
+% Note that \env{align} uses two-passes. In the second pass,
+% \cs{@autobreak@maxlhslength} gets the correct value.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@lhslength{#1}%
     \ifdim\@autobreak@lhslength>\z@
+      \ifdim\@autobreak@lhslength>\@autobreak@maxlhslength
+        \global\@autobreak@maxlhslength=\@autobreak@lhslength
+      \fi
       \@autobreak@maxrhslength=\linewidth
-      \advance\@autobreak@maxrhslength by -\@autobreak@lhslength
+      \advance\@autobreak@maxrhslength by -\@autobreak@maxlhslength
       \advance\@autobreak@maxrhslength by -\@autobreak@sp
       \@autobreak@alltoks={#1{}&}%
     \fi
