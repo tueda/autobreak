@@ -12,5 +12,6 @@
 *.pdf
 *.ps
 *.sty
+*.tar.gz
 *.tmp
 *.toc
