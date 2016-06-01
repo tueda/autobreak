@@ -741,27 +741,66 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{@autobreak@scanline}
-% Takes a line. Here a line ends with |^^M|.
+% Takes a line from the input stream. Here a line ends with |^^M|.
 %    \begin{macrocode}
 \begingroup
   \catcode`\^^M=\active
-  \gdef\@autobreak@scanline#1^^M{%
-%    \end{macrocode}
-% Until \cs{@autobreak@end} appears as the next token, we repeatedly
-% continue to read a line. In the both cases, the current line is passed
-% to \cs{@autobreak@processline}.
-%    \begin{macrocode}
-    \@ifnextchar\@autobreak@end{%
-      \@autobreak@processline{#1}%
-    }{%
-      \@autobreak@processline{#1}%
-%    \end{macrocode}
-% The following line has to have |%| at the end.
-%    \begin{macrocode}
-      \@autobreak@scanline@%
-    }%
-  }
+  \gdef\@autobreak@scanline#1^^M{\@autobreak@scanline@{#1}}
 \endgroup
+%    \end{macrocode}
+% If the next token is a punctuation, then we merge it into the current
+% line. (Otherwise it can make a line only with a period, for example).
+%    \begin{macrocode}
+\def\@autobreak@scanline@#1{%
+  \@autobreak@ifnextpunct{%
+    \@autobreak@scanline@gobble{#1}%
+  }{%
+    \@autobreak@scanline@@{#1}%
+  }%
+}
+%    \end{macrocode}
+% A helper macro of \cs{@ifnextpunct}\marg{if-yes}\marg{if-no}.
+%    \begin{macrocode}
+\def\@autobreak@ifnextpunct#1#2{%
+  \@ifnextchar.{%
+    #1%
+  }{%
+    \@ifnextchar,{%
+      #1%
+    }{%
+      \@ifnextchar;{%
+        #1%
+      }{%
+        \@ifnextchar:{%
+          #1%
+        }{%
+          #2%
+        }%
+      }%
+    }%
+  }%
+}
+%    \end{macrocode}
+% Merge punctuations as possible (usually there is only one period in a
+% line, though).
+%    \begin{macrocode}
+\def\@autobreak@scanline@gobble#1#2{%
+  \@autobreak@ifnextpunct{%
+    \@autobreak@scanline@gobble{#1#2}%
+  }{%
+    \@autobreak@scanline@@{#1#2}%
+  }%
+}
+%    \end{macrocode}
+% Pass the current line to \cs{@autobreak@processline}. Then, repeat
+% scanning lines until \cs{@autobreak@end} appears as the next token.
+%    \begin{macrocode}
+\def\@autobreak@scanline@@#1{%
+  \@autobreak@processline{#1}%
+  \@ifnextchar\@autobreak@end{}{%
+    \@autobreak@scanline@@@
+  }%
+}
 %    \end{macrocode}
 % One may expect \cs{input}\marg{file} in \env{autobreak} is expanded by
 % the file content and \env{autobreak} treats new lines in it correctly.
@@ -772,15 +811,15 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \IfFileExists{catchfile.sty}{
   \RequirePackage{catchfile}
-  \def\@autobreak@scanline@{%
+  \def\@autobreak@scanline@@@{%
     \@ifnextchar\input{%
-      \@autobreak@scanline@@
+      \@autobreak@scanline@input
     }{%
       \@autobreak@scanline
     }%
   }
 }{
-  \def\@autobreak@scanline@{%
+  \def\@autobreak@scanline@@@{%
     \@ifnextchar\input{%
       \PackageWarning{autobreak}{%
         Cannot handle new lines in a file via \protect\input,
@@ -791,9 +830,9 @@ version 2005/12/01 or later.
   }
 }
 %    \end{macrocode}
-%
+% The argument |#1| is \cs{input} and |#2| is the file name.
 %    \begin{macrocode}
-\def\@autobreak@scanline@@#1#2{%
+\def\@autobreak@scanline@input#1#2{%
   \CatchFileDef\@tempa{#2}{\catcode`\^^M=\active}%
   \expandafter\@autobreak@scanline\@tempa
 }
