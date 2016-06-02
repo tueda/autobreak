@@ -24,6 +24,7 @@ DISTFILES = \
 	$(CONTRIBUTION).ins \
 	$(CONTRIBUTION).sty \
 	$(CONTRIBUTION).pdf \
+	README.md \
 
 all: $(CONTRIBUTION).pdf
 

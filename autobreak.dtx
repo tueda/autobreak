@@ -93,6 +93,7 @@ version 2005/12/01 or later.
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{hypdoc}
+\usepackage{amsmath}
 \usepackage{autobreak}
 \EnableCrossrefs
 \CodelineIndex
@@ -121,7 +122,7 @@ version 2005/12/01 or later.
     \begin{minipage}[t]{0.45\linewidth}%
       \VerbatimInput{\examplefilename}%
     \end{minipage}%
-    \begin{minipage}[t]{0.45\linewidth}%
+    \begin{minipage}[t]{0.5\linewidth}%
       \input{\examplefilename}%
     \end{minipage}%
   \end{list}%
@@ -145,8 +146,45 @@ version 2005/12/01 or later.
   \noindent
 }
 
+\newenvironment{example**}{%
+  \VerbatimEnvironment
+  \begin{VerbatimOut}[gobble=2]{\examplefilename}%
+}{%
+  \end{VerbatimOut}%
+  \smallskip
+  \noindent
+  \begin{list}{}{}\item
+    \begin{minipage}[t]{0.95\linewidth}%
+      \VerbatimInput{\examplefilename}%
+    \end{minipage} \\
+    \begin{minipage}[t]{0.95\linewidth}%
+      \input{\examplefilename}%
+    \end{minipage}%
+  \end{list}%
+  \smallskip
+  \noindent
+}
+
+% decl from ltxguide[2001/05/28]
+\newenvironment{decl}[1][]%
+    {\par\small\addvspace{4.5ex plus 1ex}%
+     \vskip -\parskip
+     \ifx\relax#1\relax
+        \def\@decl@date{}%
+     \else
+        \def\@decl@date{\NEWfeature{#1}}%
+     \fi
+     \noindent\hspace{-\leftmargini}%
+     \begin{tabular}{|l|}\hline\ignorespaces}%
+    {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
+     \vspace{2.3ex}\vskip -\parskip}
+
 \newcommand\NumberedBox[1]{%
-  \, \framebox[28pt]{#1}%
+  \, \framebox[25pt]{#1} \,%
+}
+
+\newcommand\LongerNumberedBox[1]{%
+  \, \framebox[30pt]{#1} \,%
 }
 
 \begin{document}
@@ -179,11 +217,11 @@ version 2005/12/01 or later.
 %        to \pkg{autobreak}~\fileversion, dated \filedate.}}
 % \author{Takahiro Ueda}
 %
-% \date{1 June 2016}
+% \date{3 June 2016}
 %
 % \maketitle
 %
-% \changes{v0.1}{2016/06/01}{Initial version}
+% \changes{v0.1}{2016/06/03}{Initial version}
 %
 % \tableofcontents
 %
@@ -191,14 +229,8 @@ version 2005/12/01 or later.
 %
 % Sometimes people want to put long formulae in their documents, which
 % do not fit in a line and may span over multiple pages.
-% The following is a relatively \textit{short}^^A
-% \footnote{^^A
-%   One of the `worst' equations can be found in the appendices of
-%   \url{http://arxiv.org/abs/hep-ph/0504242}.
-% }
-% equation of explicitly
-% writing down the first 200 terms in the sum of the well-known Basel
-% problem:
+% The following is an equation of explicitly writing down the first 100
+% terms in the sum of the well-known Basel problem:
 % \begin{align}
 % \begin{autobreak}
 % \zeta(2) =
@@ -302,132 +334,35 @@ version 2005/12/01 or later.
 % + \frac{1}{9604}
 % + \frac{1}{9801}
 % + \frac{1}{10000}
-% + \frac{1}{10201}
-% + \frac{1}{10404}
-% + \frac{1}{10609}
-% + \frac{1}{10816}
-% + \frac{1}{11025}
-% + \frac{1}{11236}
-% + \frac{1}{11449}
-% + \frac{1}{11664}
-% + \frac{1}{11881}
-% + \frac{1}{12100}
-% + \frac{1}{12321}
-% + \frac{1}{12544}
-% + \frac{1}{12769}
-% + \frac{1}{12996}
-% + \frac{1}{13225}
-% + \frac{1}{13456}
-% + \frac{1}{13689}
-% + \frac{1}{13924}
-% + \frac{1}{14161}
-% + \frac{1}{14400}
-% + \frac{1}{14641}
-% + \frac{1}{14884}
-% + \frac{1}{15129}
-% + \frac{1}{15376}
-% + \frac{1}{15625}
-% + \frac{1}{15876}
-% + \frac{1}{16129}
-% + \frac{1}{16384}
-% + \frac{1}{16641}
-% + \frac{1}{16900}
-% + \frac{1}{17161}
-% + \frac{1}{17424}
-% + \frac{1}{17689}
-% + \frac{1}{17956}
-% + \frac{1}{18225}
-% + \frac{1}{18496}
-% + \frac{1}{18769}
-% + \frac{1}{19044}
-% + \frac{1}{19321}
-% + \frac{1}{19600}
-% + \frac{1}{19881}
-% + \frac{1}{20164}
-% + \frac{1}{20449}
-% + \frac{1}{20736}
-% + \frac{1}{21025}
-% + \frac{1}{21316}
-% + \frac{1}{21609}
-% + \frac{1}{21904}
-% + \frac{1}{22201}
-% + \frac{1}{22500}
-% + \frac{1}{22801}
-% + \frac{1}{23104}
-% + \frac{1}{23409}
-% + \frac{1}{23716}
-% + \frac{1}{24025}
-% + \frac{1}{24336}
-% + \frac{1}{24649}
-% + \frac{1}{24964}
-% + \frac{1}{25281}
-% + \frac{1}{25600}
-% + \frac{1}{25921}
-% + \frac{1}{26244}
-% + \frac{1}{26569}
-% + \frac{1}{26896}
-% + \frac{1}{27225}
-% + \frac{1}{27556}
-% + \frac{1}{27889}
-% + \frac{1}{28224}
-% + \frac{1}{28561}
-% + \frac{1}{28900}
-% + \frac{1}{29241}
-% + \frac{1}{29584}
-% + \frac{1}{29929}
-% + \frac{1}{30276}
-% + \frac{1}{30625}
-% + \frac{1}{30976}
-% + \frac{1}{31329}
-% + \frac{1}{31684}
-% + \frac{1}{32041}
-% + \frac{1}{32400}
-% + \frac{1}{32761}
-% + \frac{1}{33124}
-% + \frac{1}{33489}
-% + \frac{1}{33856}
-% + \frac{1}{34225}
-% + \frac{1}{34596}
-% + \frac{1}{34969}
-% + \frac{1}{35344}
-% + \frac{1}{35721}
-% + \frac{1}{36100}
-% + \frac{1}{36481}
-% + \frac{1}{36864}
-% + \frac{1}{37249}
-% + \frac{1}{37636}
-% + \frac{1}{38025}
-% + \frac{1}{38416}
-% + \frac{1}{38809}
-% + \frac{1}{39204}
-% + \frac{1}{39601}
-% + \frac{1}{40000}
 % + \dots .
 % \end{autobreak}
 % \end{align}
 % The above example might seem nonsense, but putting long formulae may
-% make a sense in some cases and become inevitable for completeness of
+% have a meaning in some cases and become inevitable for completeness of
 % documents, writing self-contained papers, or just to impress readers.
 % They are typically generated as outputs of computer algebra systems,
-% and would have the form of a sum of many terms in which each
-% term is short.
+% and would have the form of a sum of many terms while each term is
+% short.
 %
 % Then, the question is how to break long formulae in such a way that
-% the expressions do not make any overfull lines. Certainly, one can
-% attempt to manually insert line breaks by trial and error, checking
-% whether \LaTeX{} warns overfull lines, and this process could be
-% automatized by external scripts at some extent. A shortcoming of such
-% `manual' approaches is that line breaks have to be reexamined whenever
-% the layout of documents is changed, e.g., replacing the document class
-% or reusing existing equations into another document with a different
-% format.
+% the expressions do not make any overfull lines for \LaTeX{}.
+% Certainly, one can attempt to manually insert line breaks by trial and
+% error, checking whether \LaTeX{} warns overfull lines, and this
+% process could be automatized by external scripts at some extent.
+% A shortcoming of such `manual' approaches is that line breaks have to
+% be reexamined whenever the layout of documents is changed, e.g.,
+% replacing the document class or reusing existing equations into
+% another document with a different format.
 %
-% The goal of the \pkg{autobreak} package is to give a reasonable
-% solution for (semi-) automatic line breaking of long formulae within
+% The goal of the \pkg{autobreak} package is to give a reasonably simple
+% solution for (semi-)automatic line breaking of long formulae within
 % \LaTeX{}^^A
 % \footnote{^^A
-%   There is another package \pkg{breqn}, which adopts a more automatic
-%   fashion and may be useful for more complicated line breaking.
+%   There is another package \pkg{breqn}
+%   (\url{https://www.ctan.org/pkg/breqn}), which adopts a more
+%   automatic fashion and is useful for more sophisticated line
+%   breaking, unless you get ``Dimension too large'' error for really
+%   big expressions.
 % }.
 %
 % \section{Usage}
@@ -441,21 +376,35 @@ version 2005/12/01 or later.
 %   Actually \pkg{autobreak} internally loads \pkg{amsmath}, but it is
 %   still a good practice to explicitly include all packages providing
 %   macros used in your document.
-% },
+% }:
 % \begin{example*}
 %   \usepackage{amsmath}
 %   \usepackage{autobreak}
 % \end{example*}
 % When your document contains long equations over multiple pages,
-% you might want to use \cs{allowdisplaybreaks} of \pkg{amsmath} package
-% in the preamble,
+% you might want to use \cs{allowdisplaybreaks} of \pkg{amsmath}
+% package:
 % \begin{example*}
 %   \allowdisplaybreaks
 % \end{example*}
 %
-% \DescribeEnv{autobreak}
+% \begin{decl}
+% |\begin{autobreak}| \\
+%   \meta{long-equations} \\
+% |\end{autobreak}|
+% \end{decl}
+% \SpecialEnvIndex{autobreak}
 % The \env{autobreak} environment is used for breaking lines in long
-% formulae in the \env{align} environment of \pkg{amsmath}.
+% formulae in the \env{align} environment of \pkg{amsmath}^^A
+% \footnote{^^A
+%   Technically, \env{align} (with \cs{notag} to suppress equation
+%   numbers except the last line) is the only option we can use for
+%   page-break aligned equations within \pkg{amsmath} because
+%   \env{split}, \env{gathered}, \env{aligned} and \env{alginedat} do
+%   not allow page breaking.
+%   \env{dmath} of \env{breqn} with \cs{eqinterlinepenalty}\texttt{=0}
+%   allows page breaking, but may fail to find a reasonable tag place.
+% }.
 % \begin{example}
 %   \begin{align}
 %     \begin{autobreak}
@@ -470,12 +419,22 @@ version 2005/12/01 or later.
 %       + \frac{1}{512}
 %       + \frac{1}{729}
 %       + \frac{1}{1000}
+%       + \frac{1}{1331}
+%       + \frac{1}{1728}
+%       + \frac{1}{2197}
+%       + \frac{1}{2744}
+%       + \frac{1}{3375}
+%       + \frac{1}{4096}
+%       + \frac{1}{4913}
+%       + \frac{1}{5832}
+%       + \frac{1}{6859}
+%       + \frac{1}{8000}
 %       + \dots .
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
 % The magic happens from the simple fact that \env{autobreak} interprets
-% all new line characters appearing between |\begin{autobreaK}| and
+% all new line characters appearing between |\begin{autobreak}| and
 % |\end{autobreak}| as \textit{breakable points}, at which any line
 % breaks can be logically inserted. To be more exact, the first
 % non-empty block, separated from the rest by a new line character,
@@ -496,9 +455,79 @@ version 2005/12/01 or later.
 %       \NumberedBox{8}
 %       \NumberedBox{9}
 %       \NumberedBox{10}
+%       \NumberedBox{11}
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
+%
+% It is also possible to put more than one \env{autobreak} in one
+% \env{align}:
+% \begin{example}
+%   \begin{align}
+%     \begin{autobreak}
+%       \NumberedBox{1} =
+%       \NumberedBox{2}
+%       + \NumberedBox{3}
+%       + \NumberedBox{4}
+%       + \NumberedBox{5}
+%       + \NumberedBox{6}
+%       + \NumberedBox{7}
+%       + \NumberedBox{8}
+%       + \NumberedBox{9}
+%       + \NumberedBox{10} ,
+%     \end{autobreak}
+%     \\
+%     \begin{autobreak}
+%       \LongerNumberedBox{1} =
+%       \NumberedBox{2}
+%       + \NumberedBox{3}
+%       + \NumberedBox{4}
+%       + \NumberedBox{5}
+%       + \NumberedBox{6}
+%       + \NumberedBox{7}
+%       + \NumberedBox{8}
+%       + \NumberedBox{9}
+%       + \NumberedBox{10} .
+%     \end{autobreak}
+%   \end{align}
+% \end{example}
+% For a technical reason, it often requires more than one run of
+% \LaTeX{}, and in such cases one will get informed by the following
+% warning:
+% \begin{example*}
+%   Package autobreak Warning: Layout may have changed.
+%   (autobreak)                Rerun to get layout correct.
+% \end{example*}
+% In the next run, the layout of the equations will be corrected.
+%
+% \begin{decl}
+% |\everybeforeautobreak| \marg{tokens} \\
+% |\everyaftereautobreak| \marg{tokens}
+% \end{decl}
+% \SpecialUsageIndex{\everybeforeautobreak}
+% \SpecialUsageIndex{\everyafterautobreak}
+% They specify token lists inserted before and after automatically
+% inserted line breaks in \env{autobreak}. For example,
+% \begin{example**}
+%   \begin{align}
+%     \everyafterautobreak{\times}
+%     \begin{autobreak}
+%       \cos\left(\frac{\pi x}{2}\right) =
+%       \left(1-x^2\right)
+%       \left(1-\frac{x^2}{9}\right)
+%       \left(1-\frac{x^2}{25}\right)
+%       \left(1-\frac{x^2}{49}\right)
+%       \left(1-\frac{x^2}{81}\right)
+%       \left(1-\frac{x^2}{121}\right)
+%       \left(1-\frac{x^2}{169}\right)
+%       \left(1-\frac{x^2}{225}\right)
+%       \left(1-\frac{x^2}{289}\right)
+%       \left(1-\frac{x^2}{361}\right)
+%       \left(1-\frac{x^2}{441}\right)
+%       \dots .
+%     \end{autobreak}
+%   \end{align}
+% \end{example**}
 %
 % \section{Caveats}
 %
@@ -527,10 +556,8 @@ version 2005/12/01 or later.
 %   l.8   \end{align}
 % \end{example*}
 %
-% \StopEventually{^^A
-%   \PrintChanges
-%   \PrintIndex
-% }
+% Putting `|\\|' or `|&|' inside \env{autobreak}, which tries to insert
+% these special stuffs automatically, also causes typesetting errors.
 %
 % The \env{autobreak} environment uses \cs{linewidth} as the maximum
 % width that expressions in its body can occupy. There is no way for
@@ -567,8 +594,8 @@ version 2005/12/01 or later.
 %   \end{align}
 % \end{example*}
 % The current version of \env{autobreak} supports these cases: the file
-% content of \cs{input}\marg{file} is expanded before parsing lines,
-% with the help of the \pkg{catchfile} package^^A
+% content of \cs{input}\marg{file} is expanded before recognizing the
+% lines, with the help of the \pkg{catchfile} package^^A
 % \footnote{%
 %   \url{https://www.ctan.org/pkg/catchfile}.
 % },
@@ -581,6 +608,27 @@ version 2005/12/01 or later.
 %     \end{autobreak}
 %   \end{align}
 % \end{example*}
+% The difficulty comes from the fact that it needs to be expanded before
+% \env{autobreak} scans lines. By the same reason, \env{autobreak} fails
+% to detect new lines defined inside macros:
+% \begin{example*}
+%   \newcommand{\foo}{
+%     a
+%     + b
+%     + c
+%     + d
+%   }
+%   \begin{align}
+%     \begin{autobreak}
+%       \foo + \foo + \foo + \foo  % No new lines can be found.
+%     \end{autobreak}
+%   \end{align}
+% \end{example*}
+%
+% \StopEventually{^^A
+%   \PrintChanges
+%   \PrintIndex
+% }
 %
 % \section{Implementation}
 %
@@ -588,7 +636,7 @@ version 2005/12/01 or later.
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{autobreak}%
-  [2016/06/01 v0.1 simple line breaking in equations]
+  [2016/06/03 v0.1 simple line breaking of long formulae]
 %    \end{macrocode}
 %
 % \subsection{Registers and constants}
@@ -684,10 +732,9 @@ version 2005/12/01 or later.
 % When there are two or more \env{autobreak} in one \env{align}, each
 % \env{autobreak} has to know the maximum width of the left-hand side of
 % the all \env{autobreak} in the same \env{align}. Instead of violating
-% `causality' (in other words, how \LaTeX{} parses a file from the
-% beginning to the end), we use |.aux| file to store the maximum
-% left-hand side width, which provides the correct value in the next
-% run.
+% `causality' (e.g., how \LaTeX{} parses a file from the beginning to
+% the end), we use |.aux| file to store the maximum left-hand side
+% width, which provides the correct value in the next run.
 %
 % \begin{macro}{\if@autobreak@invalidlayout}
 % The switch to be turned on when an invalid layout is detected.
@@ -696,7 +743,7 @@ version 2005/12/01 or later.
 \@autobreak@invalidlayoutfalse
 %    \end{macrocode}
 % \end{macro}
-%
+% Show a warning if the user needs to rerun.
 %    \begin{macrocode}
 \AtEndDocument{%
   \if@autobreak@invalidlayout
@@ -773,7 +820,9 @@ version 2005/12/01 or later.
     \fi
 %    \end{macrocode}
 % Note that \cs{@autobreak@maxlhswidth} becomes problematic only when
-% two or more \env{autobreak} appear in one \env{align}.
+% two or more \env{autobreak} appear in one \env{align}. In the case
+% with one \env{autobreak}, the default value |0pt| is safe for the next
+% run.
 %    \begin{macrocode}
     \ifnum\arabic{@autobreak@subeqnindex}>1
       \if@filesw
@@ -877,7 +926,8 @@ version 2005/12/01 or later.
 %
 % \begin{environment}{autobreak}
 % Checks if we are in \env{align} (and \cs{@autobreak@newlinedef} is
-% applied) and collects its body via \cs{collect@body}.
+% applied), increments the counter and collects its body via
+% \cs{collect@body}.
 %    \begin{macrocode}
 \newenvironment{autobreak}{%
   \if@autobreak@newlinedef
@@ -1021,7 +1071,7 @@ version 2005/12/01 or later.
     \@ifnextchar\input{%
       \PackageWarning{autobreak}{%
         Cannot handle new lines in a file via \protect\input,
-        \MessageBreak which requires the catchfile packages
+        \MessageBreak which requires the catchfile package
       }%
     }%
     \@autobreak@scanline
@@ -1101,7 +1151,9 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{\@autobreak@settowidth}
-% Same as \cs{settowidth} but in math mode.
+% Same as \cs{settowidth} but in math mode. We assume \cs{displaystyle}.
+% (Anyway \env{align} issues \cs{displaystyle} at the beginning of every
+% cell.)
 %    \begin{macrocode}
 \def\@autobreak@settowidth#1#2{%
   \settowidth#1{$\displaystyle#2$}%
