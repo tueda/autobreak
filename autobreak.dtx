@@ -593,49 +593,49 @@ version 2005/12/01 or later.
 %
 % \subsection{Registers and constants}
 %
-% \begin{macro}{@autobreak@alltoks}
+% \begin{macro}{\@autobreak@alltoks}
 % The token register to store the whole result of \env{autobreak}.
 %    \begin{macrocode}
 \newtoks\@autobreak@alltoks
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@linetoks}
+% \begin{macro}{\@autobreak@linetoks}
 % The token register for the current line.
 %    \begin{macrocode}
 \newtoks\@autobreak@linetoks
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@lhswidth}
+% \begin{macro}{\@autobreak@lhswidth}
 % The width of the current left-hand side.
 %    \begin{macrocode}
 \newdimen\@autobreak@lhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@rhswidth}
+% \begin{macro}{\@autobreak@rhswidth}
 % The width of the current right-hand side.
 %    \begin{macrocode}
 \newdimen\@autobreak@rhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@maxlhswidth}
+% \begin{macro}{\@autobreak@maxlhswidth}
 % The width of the longest left-hand side occupied.
 %    \begin{macrocode}
 \newdimen\@autobreak@maxlhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@maxrhswidth}
+% \begin{macro}{\@autobreak@maxrhswidth}
 % The maximum width that the right-hand sides can occupy.
 %    \begin{macrocode}
 \newdimen\@autobreak@maxrhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@sep}
+% \begin{macro}{\@autobreak@sep}
 % The additional space needed for putting the left-hand side and the
 % right-hand side in one line, in other words, the separation for |&|.
 % TODO: how can we know the exact extra space to be inserted?
@@ -644,7 +644,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@newlinechar}
+% \begin{macro}{\@autobreak@newlinechar}
 % The macro representing an active |^^M|.
 %    \begin{macrocode}
 \begingroup
@@ -654,13 +654,13 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{Hacking \texttt{amsmath}}
+% \subsection{Hacking \pkg{amsmath}}
 %
 %    \begin{macrocode}
 \RequirePackage{amsmath}
 %    \end{macrocode}
 %
-% \begin{macro}{if@autobreak@newlinedef}
+% \begin{macro}{\if@autobreak@newlinedef}
 % The switch to be turned on when \cs{@autobreak@newlinedef} applies.
 %    \begin{macrocode}
 \newif\if@autobreak@newlinedef
@@ -668,7 +668,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@newlinedef}
+% \begin{macro}{\@autobreak@newlinedef}
 % Installs the definition of |^^M| as a space. This is virtually
 % harmless in math mode.
 %    \begin{macrocode}
@@ -682,7 +682,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{collect@body}
+% \begin{macro}{\collect@body}
 % We need to override \cs{collect@body} such that it keeps |^^M|.
 %    \begin{macrocode}
 \def\collect@body#1{%
@@ -721,7 +721,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{environment}
 %
-% \subsection{\texttt{autobreak} environment}
+% \subsection{\env{autobreak} environment}
 %
 % \begin{environment}{autobreak}
 % Checks if we are in \env{align} (and \cs{@autobreak@newlinedef} is
@@ -741,7 +741,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{environment}
 %
-% \begin{macro}{@autobreak}
+% \begin{macro}{\@autobreak}
 % Called from \cs{collect@body}. The parameter |#1| is the whole body.
 % It takes also |#2| and |#3|, which are always \cs{end} and
 % |autobreak|, to remove them from the successive tokens.
@@ -763,7 +763,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@init}
+% \begin{macro}{\@autobreak@init}
 % Initialization.
 %    \begin{macrocode}
 \def\@autobreak@init{%
@@ -774,7 +774,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@end}
+% \begin{macro}{\@autobreak@end}
 % Finalization. It generates the whole lines in one go.
 %    \begin{macrocode}
 \def\@autobreak@end{%
@@ -785,7 +785,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@scanline}
+% \begin{macro}{\@autobreak@scanline}
 % Takes a line from the input stream. Here a line ends with |^^M|.
 %    \begin{macrocode}
 \begingroup
@@ -884,7 +884,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@processline}
+% \begin{macro}{\@autobreak@processline}
 % Each line from \cs{autobreak@scanline} should be regarded as a `block'
 % in the equation. The first block (typically the left-hand side $+$
 % `=') determines the indentation for the successive lines. From the
@@ -931,7 +931,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@addtoks}
+% \begin{macro}{\@autobreak@addtoks}
 % Appends |#2| to the token register |#1|.
 %    \begin{macrocode}
 \def\@autobreak@addtoks#1#2{%
@@ -940,7 +940,7 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@settowidth}
+% \begin{macro}{\@autobreak@settowidth}
 % Same as \cs{settowidth} but in math mode.
 %    \begin{macrocode}
 \def\@autobreak@settowidth#1#2{%
