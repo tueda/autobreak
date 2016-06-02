@@ -622,9 +622,18 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{\@autobreak@maxlhswidth}
-% The width of the longest left-hand side occupied.
+% The width of the longest left-hand side occupied. Affected by the
+% |.aux| file generated in the previous run.
 %    \begin{macrocode}
 \newdimen\@autobreak@maxlhswidth
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@autobreak@realmaxlhswidth}
+% The width of the longest left-hand side occupied. Not affected by the
+% |.aux| file generated in the previous run.
+%    \begin{macrocode}
+\newdimen\@autobreak@realmaxlhswidth
 %    \end{macrocode}
 % \end{macro}
 %
@@ -651,6 +660,127 @@ version 2005/12/01 or later.
   \catcode`\^^M=\active
   \gdef\@autobreak@newlinechar{^^M}
 \endgroup
+%    \end{macrocode}
+% \end{macro}
+%
+% \subsection{Interaction with \texttt{.aux} files}
+%
+% When there are two or more \env{autobreak} in one \env{align}, each
+% \env{autobreak} has to know the maximum width of the left-hand side of
+% the all \env{autobreak} in the same \env{align}. Instead of violating
+% `causality' (in other words, how \LaTeX{} parses a file from the
+% beginning to the end), we use |.aux| file to store the maximum
+% left-hand side width, which provides the correct value in the next
+% run.
+%
+% \begin{macro}{\if@autobreak@invalidlayout}
+% The switch to be turned on when an invalid layout is detected.
+%    \begin{macrocode}
+\newif\if@autobreak@invalidlayout
+\@autobreak@invalidlayoutfalse
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\AtEndDocument{%
+  \if@autobreak@invalidlayout
+    \if@filesw
+      \PackageWarningNoLine{autobreak}{Layout may have changed.
+        \MessageBreak Rerun to get layout correct}%
+    \else
+      \PackageWarningNoLine{autobreak}{Layout may be wrong}%
+    \fi
+  \fi
+}
+%    \end{macrocode}
+% \begin{macro}{\@autobreak@getmaxlhswidth}
+% To be expanded to a value saved in |.aux| in the previous run, or
+% |0pt| if not found.
+%    \begin{macrocode}
+\def\@autobreak@getmaxlhswidth#1{%
+  \@ifundefined{@autobreak@w@#1}{%
+    \z@
+  }{%
+    \@nameuse{@autobreak@w@#1}%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@autobreak@setmaxlhswidth}
+% Called in |.aux|.
+%    \begin{macrocode}
+\def\@autobreak@setmaxlhswidth#1#2{%
+  \global\@namedef{@autobreak@w@#1}{#2}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% We should provide \cs{@autobreak@setmaxlhswidth} in |.aux|.
+%    \begin{macrocode}
+\AtBeginDocument{%
+  \if@filesw
+    \immediate\write\@mainaux{%
+      \string\providecommand\string\@autobreak@setmaxlhswidth[2]{}%
+    }%
+  \fi
+}
+%    \end{macrocode}
+%
+% \begin{macro}{@autobreak@eqnindex}
+% The counter to identify each \env{align}.
+%    \begin{macrocode}
+\newcounter{@autobreak@eqnindex}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{@autobreak@subeqnindex}
+% The counter to store the number of \env{autobreak} in an \env{align}.
+%    \begin{macrocode}
+  \newcounter{@autobreak@subeqnindex}[@autobreak@eqnindex]%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@autobreak@loadmaxlhswidth}
+% Loads \cs{@autobreak@maxlhswidth} for the next \env{align}.
+%    \begin{macrocode}
+\def\@autobreak@loadmaxlhswidth{%
+  \stepcounter{@autobreak@eqnindex}%
+  \@autobreak@maxlhswidth=%
+    \@autobreak@getmaxlhswidth{\arabic{@autobreak@eqnindex}}%
+  \@autobreak@realmaxlhswidth=\z@
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@autobreak@savemaxlhswidth}
+% Saves \cs{@autobreak@realmaxlhswidth} for the next run.
+%    \begin{macrocode}
+\def\@autobreak@savemaxlhswidth{%
+  \ifnum\arabic{@autobreak@subeqnindex}>0
+    \ifdim\@autobreak@maxlhswidth=\@autobreak@realmaxlhswidth
+    \else
+%    \end{macrocode}
+% We have used the wrong value of \cs{@autobreak@maxlhswidth} (was too
+% much). Need to rerun.
+%    \begin{macrocode}
+      \global\@autobreak@invalidlayouttrue
+    \fi
+%    \end{macrocode}
+% Note that \cs{@autobreak@maxlhswidth} becomes problematic only when
+% two or more \env{autobreak} appear in one \env{align}.
+%    \begin{macrocode}
+    \ifnum\arabic{@autobreak@subeqnindex}>1
+      \if@filesw
+        \immediate\write\@auxout{%
+          \string\@autobreak@setmaxlhswidth%
+            {\arabic{@autobreak@eqnindex}}%
+            {\the\@autobreak@realmaxlhswidth}%
+        }%
+      \fi
+    \fi
+  \fi
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -714,9 +844,16 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \let\@autobreak@oldstart@align=\start@align
 \def\start@align{%
-  \@autobreak@maxlhswidth=\z@
+  \@autobreak@loadmaxlhswidth
   \@autobreak@newlinedef
   \@autobreak@oldstart@align
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\let\@autobreak@oldendalign=\endalign
+\def\endalign{%
+  \@autobreak@savemaxlhswidth
+  \@autobreak@oldendalign
 }
 %    \end{macrocode}
 % \end{environment}
@@ -736,6 +873,7 @@ version 2005/12/01 or later.
       Use autobreak inside align.
     }%
   \fi
+  \stepcounter{@autobreak@subeqnindex}%
   \collect@body\@autobreak
 }{}
 %    \end{macrocode}
@@ -896,13 +1034,21 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % For the first block. The rest of the width for the right-hand sides
 % is determined from \cs{linewidth} and \cs{@autobreak@maxlhswidth}.
-% Note that \env{align} uses two-passes. In the second pass,
-% \cs{@autobreak@maxlhswidth} gets the correct value.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@lhswidth{#1}%
     \ifdim\@autobreak@lhswidth>\z@
       \ifdim\@autobreak@lhswidth>\@autobreak@maxlhswidth
+        \ifdim\@autobreak@maxlhswidth>\z@
+%    \end{macrocode}
+% The previous one used the wrong value of \cs{@autobreak@maxlhswidth}
+% (was too short). Need to rerun.
+%    \begin{macrocode}
+          \global\@autobreak@invalidlayouttrue
+        \fi
         \global\@autobreak@maxlhswidth=\@autobreak@lhswidth
+      \fi
+      \ifdim\@autobreak@lhswidth>\@autobreak@realmaxlhswidth
+        \global\@autobreak@realmaxlhswidth=\@autobreak@lhswidth
       \fi
       \@autobreak@maxrhswidth=\linewidth
       \advance\@autobreak@maxrhswidth by -\@autobreak@maxlhswidth
