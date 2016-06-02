@@ -593,6 +593,22 @@ version 2005/12/01 or later.
 %
 % \subsection{Registers and constants}
 %
+% \begin{macro}{\everybeforeautobreak}
+% The list of tokens that gets inserted before every line break generated
+% by \env{autobreak}.
+%    \begin{macrocode}
+\newtoks\everybeforeautobreak
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\everyafterautobreak}
+% The list of tokens that gets inserted after every line break generated
+% by \env{autobreak}.
+%    \begin{macrocode}
+\newtoks\everyafterautobreak
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\@autobreak@alltoks}
 % The token register to store the whole result of \env{autobreak}.
 %    \begin{macrocode}
@@ -1060,18 +1076,17 @@ version 2005/12/01 or later.
 % For the rest of the blocks.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@rhswidth
-      {\the\@autobreak@linetoks#1}%
+      {\the\@autobreak@linetoks#1\the\everybeforeautobreak}%
     \ifdim\@autobreak@rhswidth>\@autobreak@maxrhswidth
 %    \end{macrocode}
 % Adding the next block gives an overfull line. Need a line break.
 %    \begin{macrocode}
-      \edef\@tempa{\the\@autobreak@linetoks}%
+      \edef\@tempa{\the\@autobreak@linetoks\the\everybeforeautobreak}%
       \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
         \expandafter{\@tempa\notag\\&}%
-      \@autobreak@linetoks={#1}%
-    \else
-      \@autobreak@addtoks\@autobreak@linetoks{#1}%
+      \@autobreak@linetoks=\everyafterautobreak
     \fi
+    \@autobreak@addtoks\@autobreak@linetoks{#1}%
   \fi
 }
 %    \end{macrocode}
