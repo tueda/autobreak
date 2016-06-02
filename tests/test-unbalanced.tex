@@ -1,0 +1,39 @@
+% unbalanced lhs
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{align}
+  \begin{autobreak}
+    \framebox[30pt]{1} =
+    \framebox[30pt]{2}
+    + \framebox[30pt]{3}
+    + \framebox[30pt]{4}
+    + \framebox[30pt]{5}
+    + \framebox[30pt]{6}
+    + \framebox[30pt]{7}
+    + \framebox[30pt]{8}
+    + \framebox[30pt]{9}
+    ,
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \framebox[200pt]{1} =
+    \framebox[30pt]{2}
+    + \framebox[30pt]{3}
+    + \framebox[30pt]{4}
+    + \framebox[30pt]{5}
+    + \framebox[30pt]{6}
+    + \framebox[30pt]{7}
+    + \framebox[30pt]{8}
+    + \framebox[30pt]{9}
+    .
+  \end{autobreak}
+\end{align}
+
+\end{document}

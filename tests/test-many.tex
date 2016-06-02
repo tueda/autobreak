@@ -1,0 +1,40 @@
+% multiple autobreak in align, many times
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+\begin{document}
+
+\begin{align}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \input{z3-100.inc}
+  \end{autobreak}
+\end{align}
+
+\begin{align}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \input{z3-100.inc}
+  \end{autobreak}
+\end{align}
+
+\begin{align}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \input{z3-100.inc}
+  \end{autobreak}
+\end{align}
+
+\end{document}

@@ -1,0 +1,17 @@
+% everyafterautobreak
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+\begin{document}
+
+\begin{align}
+  \everyafterautobreak{\times}
+  \begin{autobreak}
+    \input{cos-100.inc}
+  \end{autobreak}
+\end{align}
+
+\end{document}

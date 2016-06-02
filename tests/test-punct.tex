@@ -1,0 +1,43 @@
+% merging periods
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+
+\begin{document}
+
+\begin{minipage}{300pt}
+  No period:
+  \begin{align}
+    \begin{autobreak}
+      \framebox[200pt]{1}
+      \framebox[30pt]{2}
+      \framebox[30pt]{3}
+      \framebox[33pt]{4}
+    \end{autobreak}
+  \end{align}
+  With a period:
+  \begin{align}
+    \begin{autobreak}
+      \framebox[200pt]{1}
+      \framebox[30pt]{2}
+      \framebox[30pt]{3}
+      \framebox[33pt]{4}
+      .
+    \end{autobreak}
+  \end{align}
+  With a comma:
+  \begin{align}
+    \begin{autobreak}
+      \framebox[200pt]{1}
+      \framebox[30pt]{2}
+      \framebox[30pt]{3}
+      \framebox[33pt]{4}
+      ,
+    \end{autobreak}
+  \end{align}
+\end{minipage}
+
+\end{document}

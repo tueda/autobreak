@@ -1,0 +1,55 @@
+% different styles
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+
+% From http://tex.stackexchange.com/a/274456
+% but then \dfrac doesn't work.
+\newenvironment{talign}{%
+  \let\displaystyle\textstyle\align
+}{%
+  \endalign
+}
+
+\newenvironment{salign}{%
+  \let\displaystyle\scriptstyle\align
+}{%
+  \endalign
+}
+
+\newenvironment{ssalign}{%
+  \let\displaystyle\scriptscriptstyle\align
+}{%
+  \endalign
+}
+
+\begin{document}
+
+\begin{align}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+\end{align}
+
+\begin{talign}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+\end{talign}
+
+\begin{salign}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+\end{salign}
+
+\begin{ssalign}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+\end{ssalign}
+
+\end{document}

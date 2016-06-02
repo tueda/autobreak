@@ -1,0 +1,9 @@
+% From http://tex.stackexchange.com/questions/2083/how-can-i-visualize-boxes
+\ProvidesPackage{drawboxes}
+\RequirePackage{ifluatex}
+\ifluatex
+  \RequirePackage{graphicx}
+  \RequirePackage{atbegshi}
+  \directlua{require("drawboxes")}
+  \AtBeginShipout {\directlua{drawboxes.visual_debug()}}
+\fi
