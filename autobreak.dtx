@@ -607,31 +607,31 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@lhslength}
-% The length of the current left-hand side.
+% \begin{macro}{@autobreak@lhswidth}
+% The width of the current left-hand side.
 %    \begin{macrocode}
-\newdimen\@autobreak@lhslength
+\newdimen\@autobreak@lhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@rhslength}
-% The length of the current right-hand side.
+% \begin{macro}{@autobreak@rhswidth}
+% The width of the current right-hand side.
 %    \begin{macrocode}
-\newdimen\@autobreak@rhslength
+\newdimen\@autobreak@rhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@maxlhslength}
-% The maximum length that the left-hand sides occupied.
+% \begin{macro}{@autobreak@maxlhswidth}
+% The width of the longest left-hand side occupied.
 %    \begin{macrocode}
-\newdimen\@autobreak@maxlhslength
+\newdimen\@autobreak@maxlhswidth
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{@autobreak@maxrhslength}
-% The maximum length that the right-hand sides can occupy.
+% \begin{macro}{@autobreak@maxrhswidth}
+% The maximum width that the right-hand sides can occupy.
 %    \begin{macrocode}
-\newdimen\@autobreak@maxrhslength
+\newdimen\@autobreak@maxrhswidth
 %    \end{macrocode}
 % \end{macro}
 %
@@ -714,7 +714,7 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \let\@autobreak@oldstart@align=\start@align
 \def\start@align{%
-  \@autobreak@maxlhslength=\z@
+  \@autobreak@maxlhswidth=\z@
   \@autobreak@newlinedef
   \@autobreak@oldstart@align
 }
@@ -769,7 +769,7 @@ version 2005/12/01 or later.
 \def\@autobreak@init{%
   \@autobreak@alltoks={}%
   \@autobreak@linetoks={}%
-  \@autobreak@lhslength=\z@
+  \@autobreak@lhswidth=\z@
 }
 %    \end{macrocode}
 % \end{macro}
@@ -892,30 +892,30 @@ version 2005/12/01 or later.
 % insert a line break if it does not fit in a line.
 %    \begin{macrocode}
 \def\@autobreak@processline#1{%
-  \ifdim\@autobreak@lhslength=\z@
+  \ifdim\@autobreak@lhswidth=\z@
 %    \end{macrocode}
-% For the first block. The rest of the length for the right-hand sides
-% is determined from \cs{linewidth} and \cs{@autobreak@maxlhslength}.
+% For the first block. The rest of the width for the right-hand sides
+% is determined from \cs{linewidth} and \cs{@autobreak@maxlhswidth}.
 % Note that \env{align} uses two-passes. In the second pass,
-% \cs{@autobreak@maxlhslength} gets the correct value.
+% \cs{@autobreak@maxlhswidth} gets the correct value.
 %    \begin{macrocode}
-    \@autobreak@settowidth\@autobreak@lhslength{#1}%
-    \ifdim\@autobreak@lhslength>\z@
-      \ifdim\@autobreak@lhslength>\@autobreak@maxlhslength
-        \global\@autobreak@maxlhslength=\@autobreak@lhslength
+    \@autobreak@settowidth\@autobreak@lhswidth{#1}%
+    \ifdim\@autobreak@lhswidth>\z@
+      \ifdim\@autobreak@lhswidth>\@autobreak@maxlhswidth
+        \global\@autobreak@maxlhswidth=\@autobreak@lhswidth
       \fi
-      \@autobreak@maxrhslength=\linewidth
-      \advance\@autobreak@maxrhslength by -\@autobreak@maxlhslength
-      \advance\@autobreak@maxrhslength by -\@autobreak@sp
+      \@autobreak@maxrhswidth=\linewidth
+      \advance\@autobreak@maxrhswidth by -\@autobreak@maxlhswidth
+      \advance\@autobreak@maxrhswidth by -\@autobreak@sp
       \@autobreak@alltoks={#1{}&}%
     \fi
   \else
 %    \end{macrocode}
 % For the rest of the blocks.
 %    \begin{macrocode}
-    \@autobreak@settowidth\@autobreak@rhslength
+    \@autobreak@settowidth\@autobreak@rhswidth
       {\the\@autobreak@linetoks#1}%
-    \ifdim\@autobreak@rhslength>\@autobreak@maxrhslength
+    \ifdim\@autobreak@rhswidth>\@autobreak@maxrhswidth
 %    \end{macrocode}
 % Adding the next block gives an overfull line. Need a line break.
 %    \begin{macrocode}
