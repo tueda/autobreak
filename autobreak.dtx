@@ -732,17 +732,6 @@ version 2005/12/01 or later.
 %    \end{macrocode}
 % \end{macro}
 %
-% We should provide \cs{@autobreak@setmaxlhswidth} in |.aux|.
-%    \begin{macrocode}
-\AtBeginDocument{%
-  \if@filesw
-    \immediate\write\@mainaux{%
-      \string\providecommand\string\@autobreak@setmaxlhswidth[2]{}%
-    }%
-  \fi
-}
-%    \end{macrocode}
-%
 % \begin{macro}{@autobreak@eqnindex}
 % The counter to identify each \env{align}.
 %    \begin{macrocode}
@@ -788,6 +777,16 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
     \ifnum\arabic{@autobreak@subeqnindex}>1
       \if@filesw
+%    \end{macrocode}
+% We should provide \cs{@autobreak@setmaxlhswidth} in |.aux|.
+%    \begin{macrocode}
+        \@ifundefined{@autobreak@auxinited}{%
+          \immediate\write\@mainaux{%
+            \string\providecommand
+              \string\@autobreak@setmaxlhswidth[2]{}%
+          }%
+          \gdef\@autobreak@auxinited{}%
+        }{}%
         \immediate\write\@auxout{%
           \string\@autobreak@setmaxlhswidth%
             {\arabic{@autobreak@eqnindex}}%
