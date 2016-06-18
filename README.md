@@ -56,6 +56,9 @@ Example
 
 \end{document}
 ```
+
+![Example](https://github.com/tueda/autobreak/blob/images/example.png)
+
 Here, new line characters in the autobreak environment are recognized as
 candidates for line breaks.
 
