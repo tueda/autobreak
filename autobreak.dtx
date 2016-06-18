@@ -217,9 +217,14 @@ version 2005/12/01 or later.
 %        to \pkg{autobreak}~\fileversion, dated \filedate.}}
 % \author{Takahiro Ueda}
 %
-% \date{3 June 2016}
+% \date{18 June 2016}
 %
 % \maketitle
+%
+% \begin{abstract}
+%   This package provides a simple mechanism to (semi-)automatically
+%   insert line/page breaks in long equations.
+% \end{abstract}
 %
 % \changes{v0.1}{2016/06/03}{Initial version}
 %
@@ -229,7 +234,7 @@ version 2005/12/01 or later.
 %
 % Sometimes people want to put long formulae in their documents, which
 % do not fit in a line and may span over multiple pages.
-% The following is an equation of explicitly writing down the first 100
+% The following is an equation of explicitly writing down the first 50
 % terms in the sum of the well-known Basel problem:
 % \begin{align}
 % \begin{autobreak}
@@ -284,57 +289,7 @@ version 2005/12/01 or later.
 % + \frac{1}{2304}
 % + \frac{1}{2401}
 % + \frac{1}{2500}
-% + \frac{1}{2601}
-% + \frac{1}{2704}
-% + \frac{1}{2809}
-% + \frac{1}{2916}
-% + \frac{1}{3025}
-% + \frac{1}{3136}
-% + \frac{1}{3249}
-% + \frac{1}{3364}
-% + \frac{1}{3481}
-% + \frac{1}{3600}
-% + \frac{1}{3721}
-% + \frac{1}{3844}
-% + \frac{1}{3969}
-% + \frac{1}{4096}
-% + \frac{1}{4225}
-% + \frac{1}{4356}
-% + \frac{1}{4489}
-% + \frac{1}{4624}
-% + \frac{1}{4761}
-% + \frac{1}{4900}
-% + \frac{1}{5041}
-% + \frac{1}{5184}
-% + \frac{1}{5329}
-% + \frac{1}{5476}
-% + \frac{1}{5625}
-% + \frac{1}{5776}
-% + \frac{1}{5929}
-% + \frac{1}{6084}
-% + \frac{1}{6241}
-% + \frac{1}{6400}
-% + \frac{1}{6561}
-% + \frac{1}{6724}
-% + \frac{1}{6889}
-% + \frac{1}{7056}
-% + \frac{1}{7225}
-% + \frac{1}{7396}
-% + \frac{1}{7569}
-% + \frac{1}{7744}
-% + \frac{1}{7921}
-% + \frac{1}{8100}
-% + \frac{1}{8281}
-% + \frac{1}{8464}
-% + \frac{1}{8649}
-% + \frac{1}{8836}
-% + \frac{1}{9025}
-% + \frac{1}{9216}
-% + \frac{1}{9409}
-% + \frac{1}{9604}
-% + \frac{1}{9801}
-% + \frac{1}{10000}
-% + \dots .
+% + \dots
 % \end{autobreak}
 % \end{align}
 % The above example might seem nonsense, but putting long formulae may
@@ -350,7 +305,7 @@ version 2005/12/01 or later.
 % error, checking whether \LaTeX{} warns overfull lines, and this
 % process could be automatized by external scripts at some extent.
 % A shortcoming of such `manual' approaches is that line breaks have to
-% be reexamined whenever the layout of documents is changed, e.g.,
+% be reexamined whenever the layout of the document is changed, e.g.,
 % replacing the document class or reusing existing equations into
 % another document with a different format.
 %
@@ -429,7 +384,7 @@ version 2005/12/01 or later.
 %       + \frac{1}{5832}
 %       + \frac{1}{6859}
 %       + \frac{1}{8000}
-%       + \dots .
+%       + \dots
 %     \end{autobreak}
 %   \end{align}
 % \end{example}
@@ -524,7 +479,7 @@ version 2005/12/01 or later.
 %       \left(1-\frac{x^2}{289}\right)
 %       \left(1-\frac{x^2}{361}\right)
 %       \left(1-\frac{x^2}{441}\right)
-%       \dots .
+%       \dots
 %     \end{autobreak}
 %   \end{align}
 % \end{example**}
@@ -562,7 +517,7 @@ version 2005/12/01 or later.
 % The \env{autobreak} environment uses \cs{linewidth} as the maximum
 % width that expressions in its body can occupy. There is no way for
 % \env{autobreak} to know how much other formulae consume the space
-% outside of it. Therefore it fails to determine the adequate maximum
+% outside it. Therefore it fails to determine the adequate maximum
 % width when there are expressions outside \env{autobreak} and
 % then \LaTeX{} gives overfull line warnings:
 % \begin{example*}
@@ -596,10 +551,10 @@ version 2005/12/01 or later.
 % The current version of \env{autobreak} supports these cases: the file
 % content of \cs{input}\marg{file} is expanded before recognizing the
 % lines, with the help of the \pkg{catchfile} package^^A
-% \footnote{%
+% \footnote{^^A
 %   \url{https://www.ctan.org/pkg/catchfile}.
 % },
-% when it appears in the beginning of each line. But it does not support
+% when it appears at the beginning of each line. But it does not support
 % \cs{input}\marg{file} in the middle of the lines:
 % \begin{example*}
 %   \begin{align}
@@ -610,7 +565,11 @@ version 2005/12/01 or later.
 % \end{example*}
 % The difficulty comes from the fact that it needs to be expanded before
 % \env{autobreak} scans lines. By the same reason, \env{autobreak} fails
-% to detect new lines defined inside macros:
+% to detect new lines defined inside macros^^A
+% \footnote{^^A
+%   Actually, when the definition of \cs{foo} is parsed, the new line
+%   characters inside it are usually lost.
+% }:
 % \begin{example*}
 %   \newcommand{\foo}{
 %     a
@@ -620,7 +579,7 @@ version 2005/12/01 or later.
 %   }
 %   \begin{align}
 %     \begin{autobreak}
-%       \foo + \foo + \foo + \foo  % No new lines can be found.
+%       \foo + \foo + \foo + \foo  % No new lines can be detected.
 %     \end{autobreak}
 %   \end{align}
 % \end{example*}
