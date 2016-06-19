@@ -1,5 +1,6 @@
 LATEX = pdflatex
 #LATEX = lualatex
+LATEX_OPT = -interaction=nonstopmode -halt-on-error
 
 PDFS = \
 	test-basic.pdf \
@@ -80,5 +81,5 @@ test-trace.pdf: $(DEPS) trace-10.inc
 .SUFFIXES: .pdf .tex
 
 .tex.pdf:
-	$(LATEX) $<
-	$(LATEX) $<
+	$(LATEX) $(LATEX_OPT) $<
+	$(LATEX) $(LATEX_OPT) $<

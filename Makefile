@@ -1,3 +1,6 @@
+LATEX = pdflatex
+LATEX_OPT = -interaction=nonstopmode -halt-on-error
+
 CONTRIBUTION = autobreak
 
 MOSTLYCLEANFILES = \
@@ -56,11 +59,11 @@ $(CONTRIBUTION).sty: $(CONTRIBUTION).dtx
 
 $(CONTRIBUTION).pdf: $(CONTRIBUTION).dtx
 	touch thumbpdf.sty
-	pdflatex $(CONTRIBUTION).dtx
+	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
 	makeindex -s gind.ist $(CONTRIBUTION).idx
 	makeindex -s gglo.ist -o $(CONTRIBUTION).gls $(CONTRIBUTION).glo
-	pdflatex $(CONTRIBUTION).dtx
-	pdflatex $(CONTRIBUTION).dtx
+	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
+	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
 	rm thumbpdf.sty
 
 $(CONTRIBUTION).tar.gz: $(DISTFILES)

@@ -1,6 +1,7 @@
 autobreak
 =========
-Simple line breaking of long formulae.
+
+[![Build Status](https://img.shields.io/travis/tueda/autobreak/master.svg)](https://travis-ci.org/tueda/autobreak)
 
 This package provides a simple mechanism to (semi-)automatically insert
 line/page breaks in long equations.
