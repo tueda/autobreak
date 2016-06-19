@@ -217,13 +217,16 @@ version 2005/12/01 or later.
 %        to \pkg{autobreak}~\fileversion, dated \filedate.}}
 % \author{Takahiro Ueda}
 %
-% \date{18 June 2016}
+% \date{19 June 2016}
 %
 % \maketitle
 %
 % \begin{abstract}
-%   This package provides a simple mechanism to (semi-)automatically
-%   insert line/page breaks in long equations.
+%   This package implements a simple mechanism of line/page breaking
+%   within the \env{align} environment of the \pkg{amsmath} package; new
+%   line characters are considered as possible candidates for the breaks
+%   and the package tries to put breaks at adequate places.
+%   It is suitable for computer-generated long formulae with many terms.
 % \end{abstract}
 %
 % \changes{v0.1}{2016/06/03}{Initial version}

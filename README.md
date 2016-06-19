@@ -3,9 +3,11 @@ autobreak
 
 [![Build Status](https://img.shields.io/travis/tueda/autobreak/master.svg)](https://travis-ci.org/tueda/autobreak)
 
-This package provides a simple mechanism to (semi-)automatically insert
-line/page breaks in long equations.
-
+This package implements a simple mechanism of line/page breaking
+within the `align` environment of the `amsmath` package; new line
+characters are considered as possible candidates for the breaks and
+the package tries to put breaks at adequate places. It is suitable
+for computer-generated long formulae with many terms.
 
 Example
 -------
@@ -59,9 +61,6 @@ Example
 ```
 
 ![Example](https://github.com/tueda/autobreak/blob/images/example.png)
-
-Here, new line characters in the autobreak environment are recognized as
-candidates for line breaks.
 
 
 Licence
