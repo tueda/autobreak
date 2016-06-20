@@ -1,6 +1,7 @@
 autobreak
 =========
 
+[![CTAN](https://img.shields.io/ctan/v/autobreak.svg)](https://ctan.org/pkg/autobreak)
 [![Build Status](https://img.shields.io/travis/tueda/autobreak/master.svg)](https://travis-ci.org/tueda/autobreak)
 
 This package implements a simple mechanism of line/page breaking
@@ -60,7 +61,7 @@ Example
 \end{document}
 ```
 
-![Example](https://github.com/tueda/autobreak/blob/images/example.png)
+![Example](https://raw.githubusercontent.com/tueda/autobreak/images/example.png)
 
 
 Licence
