@@ -12,6 +12,7 @@ PDFS = \
 	test-every.pdf \
 	test-unbalanced.pdf \
 	test-textstyle.pdf \
+	test-fontsize.pdf \
 	test-trace.pdf \
 
 all: $(PDFS)
@@ -75,6 +76,8 @@ test-every.pdf: $(DEPS) cos-100.inc
 test-unbalanced.pdf: $(DEPS)
 
 test-textstyle.pdf: $(DEPS) z2-100.inc
+
+test-fontsize.pdf: $(DEPS) z2-100.inc
 
 test-trace.pdf: $(DEPS) trace-10.inc
 
