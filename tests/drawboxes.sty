@@ -7,3 +7,6 @@
   \directlua{require("drawboxes")}
   \AtBeginShipout {\directlua{drawboxes.visual_debug()}}
 \fi
+% "showframe" option of the geometry package gives another overfull \hbox.
+%\RequirePackage[showframe]{geometry}
+\RequirePackage{showframe}

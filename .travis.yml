@@ -32,7 +32,7 @@ before_install:
     fi
   - export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
   - tlmgr update --self
-  - tlmgr install fancyvrb
+  - tlmgr install eso-pic fancyvrb
   # FORM
   - |
     if [ ! -e ./form/form ]; then
