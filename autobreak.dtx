@@ -193,7 +193,7 @@ version 2005/12/01 or later.
 %</driver>
 % \fi
 %
-% \CheckSum{336}
+% \CheckSum{330}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -598,7 +598,7 @@ version 2005/12/01 or later.
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{autobreak}%
-  [2016/06/03 v0.1 simple line breaking of long formulae]
+  [2016/07/03 v0.2 simple line breaking of long formulae]
 %    \end{macrocode}
 %
 % \subsection{Registers and constants}
@@ -667,15 +667,6 @@ version 2005/12/01 or later.
 % The maximum width that the right-hand sides can occupy.
 %    \begin{macrocode}
 \newdimen\@autobreak@maxrhswidth
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@autobreak@sep}
-% The additional space needed for putting the left-hand side and the
-% right-hand side in one line, in other words, the separation for |&|.
-% TODO: how can we know the exact extra space to be inserted?
-%    \begin{macrocode}
-\def\@autobreak@sp{7\p@}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1050,11 +1041,14 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{\@autobreak@processline}
+% \changes{v0.2}{2016/07/03}{Fix space calculation around alignment
+%   tabs}
 % Each line from \cs{autobreak@scanline} should be regarded as a `block'
 % in the equation. The first block (typically the left-hand side $+$
 % `=') determines the indentation for the successive lines. From the
 % second block, try to append the block to the end of the line and
-% insert a line break if it does not fit in a line.
+% insert a line break if it does not fit in a line. Note that we measure
+% the widths of the blocks with putting |{}| around alignment tabs.
 %    \begin{macrocode}
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhswidth=\z@
@@ -1062,7 +1056,7 @@ version 2005/12/01 or later.
 % For the first block. The rest of the width for the right-hand sides
 % is determined from \cs{linewidth} and \cs{@autobreak@maxlhswidth}.
 %    \begin{macrocode}
-    \@autobreak@settowidth\@autobreak@lhswidth{#1}%
+    \@autobreak@settowidth\@autobreak@lhswidth{#1{}}%
     \ifdim\@autobreak@lhswidth>\z@
       \ifdim\@autobreak@lhswidth>\@autobreak@maxlhswidth
         \ifdim\@autobreak@maxlhswidth>\z@
@@ -1079,7 +1073,6 @@ version 2005/12/01 or later.
       \fi
       \@autobreak@maxrhswidth=\linewidth
       \advance\@autobreak@maxrhswidth by -\@autobreak@maxlhswidth
-      \advance\@autobreak@maxrhswidth by -\@autobreak@sp
       \@autobreak@alltoks={#1{}&}%
     \fi
   \else
@@ -1087,7 +1080,7 @@ version 2005/12/01 or later.
 % For the rest of the blocks.
 %    \begin{macrocode}
     \@autobreak@settowidth\@autobreak@rhswidth
-      {\the\@autobreak@linetoks#1\the\everybeforeautobreak}%
+      {{}\the\@autobreak@linetoks#1\the\everybeforeautobreak}%
     \ifdim\@autobreak@rhswidth>\@autobreak@maxrhswidth
 %    \end{macrocode}
 % Adding the next block gives an overfull line. Need a line break.
