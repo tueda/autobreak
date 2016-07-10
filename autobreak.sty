@@ -22,7 +22,7 @@
 %% 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{autobreak}%
-  [2016/06/03 v0.1 simple line breaking of long formulae]
+  [2016/07/03 v0.2 simple line breaking of long formulae]
 \newtoks\everybeforeautobreak
 \newtoks\everyafterautobreak
 \newtoks\@autobreak@alltoks
@@ -32,7 +32,6 @@
 \newdimen\@autobreak@maxlhswidth
 \newdimen\@autobreak@realmaxlhswidth
 \newdimen\@autobreak@maxrhswidth
-\def\@autobreak@sp{7\p@}
 \begingroup
   \catcode`\^^M=\active
   \gdef\@autobreak@newlinechar{^^M}
@@ -227,7 +226,7 @@
 }
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhswidth=\z@
-    \@autobreak@settowidth\@autobreak@lhswidth{#1}%
+    \@autobreak@settowidth\@autobreak@lhswidth{#1{}}%
     \ifdim\@autobreak@lhswidth>\z@
       \ifdim\@autobreak@lhswidth>\@autobreak@maxlhswidth
         \ifdim\@autobreak@maxlhswidth>\z@
@@ -240,12 +239,11 @@
       \fi
       \@autobreak@maxrhswidth=\linewidth
       \advance\@autobreak@maxrhswidth by -\@autobreak@maxlhswidth
-      \advance\@autobreak@maxrhswidth by -\@autobreak@sp
       \@autobreak@alltoks={#1{}&}%
     \fi
   \else
     \@autobreak@settowidth\@autobreak@rhswidth
-      {\the\@autobreak@linetoks#1\the\everybeforeautobreak}%
+      {{}\the\@autobreak@linetoks#1\the\everybeforeautobreak}%
     \ifdim\@autobreak@rhswidth>\@autobreak@maxrhswidth
       \edef\@tempa{\the\@autobreak@linetoks\the\everybeforeautobreak}%
       \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
