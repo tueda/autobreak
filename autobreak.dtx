@@ -1077,17 +1077,17 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \def\@autobreak@scanline@MoveEqLeft@[#1]{%
   \ifdim#1\p@>\z@
-    \def\@tempa{\@autobreak@scanline@MoveEqLeft@pos}%
+    \def\@tempa{\@autobreak@scanline@MvEqL@pos}%
   \else\ifdim#1\p@=\z@
-    \def\@tempa{\@autobreak@scanline@MoveEqLeft@zero}%
+    \def\@tempa{\@autobreak@scanline@MvEqL@zero}%
   \else
-    \def\@tempa{\@autobreak@scanline@MoveEqLeft@neg}%
+    \def\@tempa{\@autobreak@scanline@MvEqL@neg}%
   \fi\fi
   \@tempa{#1}%
 }
 %    \end{macrocode}
 %    \begin{macrocode}
-\def\@autobreak@scanline@MoveEqLeft@pos#1{%
+\def\@autobreak@scanline@MvEqL@pos#1{%
   \def\@tempa{\expandafter\@autobreak@scanline\kern#1em}%
   \expandafter\@tempa\@autobreak@newlinechar\kern-#1em%
 }
@@ -1096,7 +1096,7 @@ version 2005/12/01 or later.
 % \cs{@autobreak@processline} ignores a zero width. Insert a very tiny
 % space.
 %    \begin{macrocode}
-\def\@autobreak@scanline@MoveEqLeft@zero#1{%
+\def\@autobreak@scanline@MvEqL@zero#1{%
   \def\@tempa{\expandafter\@autobreak@scanline\kern1sp}%
   \expandafter\@tempa\@autobreak@newlinechar\kern-1sp%
 }
@@ -1105,7 +1105,7 @@ version 2005/12/01 or later.
 % space with a positive width such that the first line is indented to
 % the right.
 %    \begin{macrocode}
-\def\@autobreak@scanline@MoveEqLeft@neg#1{%
+\def\@autobreak@scanline@MvEqL@neg#1{%
   \def\@tempa{\expandafter\@autobreak@scanline\kern1sp}%
   \expandafter\@tempa\@autobreak@newlinechar\kern-1sp\kern-#1em%
 }
