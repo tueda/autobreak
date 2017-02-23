@@ -92,6 +92,7 @@ version 2005/12/01 or later.
 \documentclass{ltxdoc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage{color}
 \usepackage{hypdoc}
 \usepackage{amsmath}
 \usepackage{autobreak}
@@ -103,6 +104,12 @@ version 2005/12/01 or later.
 
 % The default value of IndexColumns=3 never fits in pages.
 \setcounter{IndexColumns}{2}
+
+\definecolor{hilite}{rgb}{0.2,0.4,0.7}
+\makeatletter
+\renewcommand{\HDorg@theCodelineNo}{%
+  \textcolor{hilite}{\rmfamily\scriptsize\arabic{CodelineNo}}}
+\makeatother
 
 \providecommand\env[1]{\texttt{#1}}
 \providecommand\pkg[1]{\textsf{#1}}
