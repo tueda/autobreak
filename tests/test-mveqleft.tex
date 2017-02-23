@@ -1,0 +1,41 @@
+% MoveEqLeft
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{autobreak}
+\usepackage{drawboxes}
+\allowdisplaybreaks
+\begin{document}
+
+\begin{align}
+  \begin{autobreak}
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \MoveEqLeft[0]
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \MoveEqLeft[1]
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \MoveEqLeft
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \MoveEqLeft[3.0]
+    \input{z2-100.inc}
+  \end{autobreak}
+  \\
+  \begin{autobreak}
+    \MoveEqLeft[-3.5]
+    \input{z2-100.inc}
+  \end{autobreak}
+\end{align}
+
+\end{document}

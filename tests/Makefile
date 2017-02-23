@@ -15,6 +15,7 @@ PDFS = \
 	test-fontsize.pdf \
 	test-muskip.pdf \
 	test-trace.pdf \
+	test-mveqleft.pdf \
 
 all: $(PDFS)
 
@@ -83,6 +84,8 @@ test-fontsize.pdf: $(DEPS) z2-100.inc
 test-muskip.pdf: $(DEPS) z2-100.inc
 
 test-trace.pdf: $(DEPS) trace-10.inc
+
+test-mveqleft.pdf: $(DEPS) z2-100.inc
 
 .SUFFIXES: .pdf .tex
 
