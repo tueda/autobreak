@@ -1,5 +1,7 @@
-LATEX = pdflatex
+LATEX     = pdflatex
 LATEX_OPT = -interaction=nonstopmode -halt-on-error
+MAKEINDEX = makeindex
+CTANIFY   = ctanify
 
 CONTRIBUTION = autobreak
 
@@ -60,11 +62,11 @@ $(CONTRIBUTION).sty: $(CONTRIBUTION).dtx
 $(CONTRIBUTION).pdf: $(CONTRIBUTION).dtx
 	touch thumbpdf.sty
 	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
-	makeindex -s gind.ist $(CONTRIBUTION).idx
-	makeindex -s gglo.ist -o $(CONTRIBUTION).gls $(CONTRIBUTION).glo
+	$(MAKEINDEX) -s gind.ist $(CONTRIBUTION).idx
+	$(MAKEINDEX) -s gglo.ist -o $(CONTRIBUTION).gls $(CONTRIBUTION).glo
 	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
 	$(LATEX) $(LATEX_OPT) $(CONTRIBUTION).dtx
 	rm thumbpdf.sty
 
 $(CONTRIBUTION).tar.gz: $(DISTFILES)
-	ctanify $(DISTFILES)
+	$(CTANIFY) $(DISTFILES)

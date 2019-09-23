@@ -33,6 +33,10 @@ before_install:
   - export PATH=$(pwd)/texlive/bin/x86_64-linux:$PATH
   - tlmgr update --self
   - tlmgr install eso-pic fancyvrb xcolor
+  - |
+    if [ -n "$DEV" ]; then
+      tlmgr install latex-amsmath-dev latex-bin-dev
+    fi
   # FORM
   - |
     if [ ! -e ./form/form ]; then
@@ -42,5 +46,10 @@ before_install:
     fi
   - export PATH=$(pwd)/form:$PATH
 
-script:
-  - make check
+matrix:
+  include:
+    - script:
+      - make check
+    - script:
+      - make check LATEX=pdflatex-dev
+      env: DEV=1
