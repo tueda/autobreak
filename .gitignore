@@ -15,3 +15,5 @@
 *.tar.gz
 *.tmp
 *.toc
+*.zip
+build

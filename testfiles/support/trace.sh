@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
+set -o pipefail
+
 N=10
 [ $# -ge 1 ] && [ -n "$1" ] && N=$1
 

@@ -1,11 +1,14 @@
 % everyafterautobreak
 
+\input{regression-test.tex}
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{autobreak}
 \usepackage{drawboxes}
 \allowdisplaybreaks
 \begin{document}
+\START
+\loggingoutput
 
 \begin{align}
   \everyafterautobreak{\times}
