@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
+SCRIPTDIR=$(cd $(dirname "$0"); pwd)
 N=10
 [ $# -ge 1 ] && [ -n "$1" ] && N=$1
 
-form -q -D N=$N trace                  |
+form -q -D N=$N $SCRIPTDIR/trace.frm   |
   sed 's/F=//'                         | # Remove the LHS
   sed 's/\*/ /g'                       | # "*" -> " "
   sed 's/(/{/g'                        | # "(" -> "{"
