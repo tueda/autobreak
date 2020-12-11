@@ -15,12 +15,13 @@ check-logs: pdf _FORCE
 	@if grep 'Overfull' .build/*.log || grep 'Warning' .build/*.log; then exit 1; fi
 	@echo OK
 
-PREREQUISITE = $(addprefix $(BUILDDIR)/, \
-	autobreak.sty \
+inc_files = $(addprefix $(BUILDDIR)/, \
 	z2-100.inc z2-500.inc z3-100.inc z4-100.inc z5-100.inc \
 	cos-100.inc trace-10.inc)
 
-CLEANFILES += $(PREREQUISITE)
+prepare-inc-files: $(inc_files)
+
+PREREQUISITE = $(BUILDDIR)/autobreak.sty $(inc_files)
 
 $(BUILDDIR)/autobreak.sty: ../autobreak.dtx
 	@$(MAKE) -C .. -s autobreak.sty
