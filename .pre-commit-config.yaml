@@ -1,0 +1,18 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+    -   id: check-case-conflict
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 483258f459955467941cf28f7c0a61dbffa3c052
+    hooks:
+    -   id: editorconfig-checker
+-   repo: https://github.com/jorisroovers/gitlint
+    rev: v0.15.0
+    hooks:
+    -   id: gitlint
