@@ -175,16 +175,16 @@ version 2005/12/01 or later.
 % decl from ltxguide[2001/05/28]
 \newenvironment{decl}[1][]%
     {\par\small\addvspace{4.5ex plus 1ex}%
-     \vskip -\parskip
-     \ifx\relax#1\relax
+      \vskip -\parskip
+      \ifx\relax#1\relax
         \def\@decl@date{}%
-     \else
+      \else
         \def\@decl@date{\NEWfeature{#1}}%
-     \fi
-     \noindent\hspace{-\leftmargini}%
-     \begin{tabular}{|l|}\hline\ignorespaces}%
+      \fi
+      \noindent\hspace{-\leftmargini}%
+      \begin{tabular}{|l|}\hline\ignorespaces}%
     {\\\hline\end{tabular}\nobreak\@decl@date\par\nobreak
-     \vspace{2.3ex}\vskip -\parskip}
+      \vspace{2.3ex}\vskip -\parskip}
 
 \newcommand\NumberedBox[1]{%
   \, \framebox[25pt]{#1} \,%
