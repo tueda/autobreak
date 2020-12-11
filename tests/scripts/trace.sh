@@ -1,5 +1,6 @@
 #!/bin/bash
 set -eu
+set -o pipefail
 SCRIPTDIR=$(cd $(dirname "$0"); pwd)
 N=10
 [ $# -ge 1 ] && [ -n "$1" ] && N=$1
