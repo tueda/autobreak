@@ -2,7 +2,7 @@ autobreak
 =========
 
 [![CTAN](https://img.shields.io/ctan/v/autobreak.svg)](https://ctan.org/pkg/autobreak)
-[![Build Status](https://img.shields.io/travis/tueda/autobreak/master.svg)](https://travis-ci.org/tueda/autobreak)
+[![CI](https://github.com/tueda/autobreak/workflows/CI/badge.svg)](https://github.com/tueda/autobreak/actions?query=branch:master)
 
 This package implements a simple mechanism of line/page breaking
 within the `align` environment of the `amsmath` package; new line
