@@ -9,7 +9,7 @@ CLEANFILES += \
 	autobreak.sty \
 	autobreak*.zip \
 
-CLEANDIRS += build
+CLEANDIRS += build testfiles
 
 all: autobreak.ins autobreak.sty autobreak.pdf
 
@@ -53,3 +53,28 @@ do_makeglossaries = \
 		$(reset_aux_file); \
 		$(call check_modified,$*.gls) && need_latex=:; \
 	fi
+
+prepare-testfiles: autobreak.ins
+	@$(MAKE) -C tests prepare-inc-files
+	@mkdir -p testfiles/support
+	@touch testfiles/support/drawboxes.sty
+	@cp tests/.build/*.inc testfiles/support/
+	@$(foreach src,$(wildcard tests/test-*.tex), \
+		sed -e '1i \\\input{regression-test.tex}' \
+			-e '/\\begin{document}/a \\\START\n\\\showoutput' \
+			-e '/\\end{document}/i \\\vfil\\\break\n\\\END' \
+			$(src) \
+			>$(patsubst tests/test-%.tex,testfiles/%.lvt,$(src)); \
+	)
+
+check-testfiles:
+	@$(foreach test,$(wildcard testfiles/*.lvt), \
+		grep -q '\\START' $(test) || exit 1; \
+		grep -q '\\END' $(test) || exit 1; \
+	)
+
+l3build-save: prepare-testfiles check-testfiles
+	@$(call exec,texlua build.lua save --engine pdftex $(patsubst testfiles/%.lvt,%,$(wildcard testfiles/*.lvt)))
+
+l3build-check:
+	@$(call exec,texlua build.lua check --engine pdftex)

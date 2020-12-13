@@ -363,5 +363,6 @@ cache
 *.ins
 *.sty
 .build
-build
 autobreak*.zip
+build
+testfiles
