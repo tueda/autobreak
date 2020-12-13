@@ -200,7 +200,7 @@ version 2005/12/01 or later.
 %</driver>
 % \fi
 %
-% \CheckSum{409}
+% \CheckSum{374}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -646,7 +646,7 @@ version 2005/12/01 or later.
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{autobreak}%
-  [2017/02/23 v0.3 simple line breaking of long formulae]
+  [2020/12/13 v0.4-dev simple line breaking of long formulae]
 %    \end{macrocode}
 %
 % \subsection{Registers and constants}
@@ -723,7 +723,7 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \begingroup
   \catcode`\^^M=\active
-  \gdef\@autobreak@newlinechar{^^M}
+  \gdef\@autobreak@newlinechar{^^M}%
 \endgroup
 %    \end{macrocode}
 % \end{macro}
@@ -866,41 +866,16 @@ version 2005/12/01 or later.
 % \begin{macro}{\@autobreak@newlinedef}
 % Installs the definition of |^^M| as a space. This is virtually
 % harmless in math mode.
+% \changes{v0.4}{2020/12/13}{Stop modifying \cs{collect@body}}
 %    \begin{macrocode}
 \begingroup
   \catcode`\^^M=\active
   \gdef\@autobreak@newlinedef{%
+    \catcode`\^^M=\active
     \def^^M{ }%
     \@autobreak@newlinedeftrue
-  }
-\endgroup
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\collect@body}
-% We need to override \cs{collect@body} such that it keeps |^^M|.
-%    \begin{macrocode}
-\def\collect@body#1{%
-  \@envbody={\expandafter#1\expandafter{\the\@envbody}}%
-  \edef\process@envbody{%
-    \the\@envbody\noexpand\end{\@currenvir}%
   }%
-  \@envbody=\@emptytoks
-  \def\begin@stack{b}%
-  \begingroup
-%    \end{macrocode}
-% Actually, the following three lines need to be inserted to the
-% original code.
-%    \begin{macrocode}
-    \if@autobreak@newlinedef
-      \catcode`\^^M=\active
-    \fi
-    \expandafter\let\csname\@currenvir\endcsname=\collect@@body
-    \edef\process@envbody{%
-      \expandafter\noexpand\csname\@currenvir\endcsname
-    }%
-    \process@envbody
-}
+\endgroup
 %    \end{macrocode}
 % \end{macro}
 %
@@ -995,7 +970,7 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
 \begingroup
   \catcode`\^^M=\active
-  \gdef\@autobreak@scanline#1^^M{\@autobreak@scanline@{#1}}
+  \gdef\@autobreak@scanline#1^^M{\@autobreak@scanline@{#1}}%
 \endgroup
 %    \end{macrocode}
 % If the next token is a punctuation, then we merge it into the current
