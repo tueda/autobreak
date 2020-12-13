@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 1 * *'  # Monthly check if it works with the latest TeXLive.
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install gitlint pre-commit
+      - run: gitlint
+      - run: pre-commit run --all-files
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tueda/setup-form@v1
+      - run: make -C tests prepare-inc-files
+      - uses: xu-cheng/texlive-action/small@v1
+        with:
+          run: |
+            apk add git make
+            tlmgr install catchfile
+            make check COLOR=always
+  test-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: tueda/setup-form@v1
+      - run: make -C tests prepare-inc-files
+      - uses: xu-cheng/texlive-action/small@v1
+        with:
+          run: |
+            apk add git make
+            tlmgr install catchfile latex-bin-dev
+            make check COLOR=always DEV=1
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: xu-cheng/texlive-action/small@v1
+        with:
+          run: |
+            apk add git make
+            tlmgr install catchfile
+            make COLOR=always
+      - uses: actions/upload-artifact@v2
+        with:
+          path: |
+            autobreak.pdf
+            autobreak.sty
+          if-no-files-found: error
+  dist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: xu-cheng/texlive-action/small@v1
+        with:
+          run: |
+            apk add git make zip
+            tlmgr install catchfile l3build
+            make dist COLOR=always
+      - uses: actions/upload-artifact@v2
+        with:
+          path: autobreak*.zip
+          if-no-files-found: error
