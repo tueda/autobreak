@@ -25,6 +25,7 @@ jobs:
         with:
           run: |
             apk add git make
+            tlmgr update --self
             tlmgr install catchfile
             make check COLOR=always
   test-dev:
@@ -37,6 +38,7 @@ jobs:
         with:
           run: |
             apk add git make
+            tlmgr update --self
             tlmgr install catchfile latex-bin-dev
             make check COLOR=always DEV=1
   build:
@@ -47,6 +49,7 @@ jobs:
         with:
           run: |
             apk add git make
+            tlmgr update --self
             tlmgr install catchfile
             make COLOR=always
       - uses: actions/upload-artifact@v2
@@ -63,6 +66,7 @@ jobs:
         with:
           run: |
             apk add git make zip
+            tlmgr update --self
             tlmgr install catchfile l3build
             make dist COLOR=always
       - uses: actions/upload-artifact@v2
