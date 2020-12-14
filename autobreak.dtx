@@ -200,7 +200,7 @@ version 2005/12/01 or later.
 %</driver>
 % \fi
 %
-% \CheckSum{374}
+% \CheckSum{394}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -956,11 +956,16 @@ version 2005/12/01 or later.
 %
 % \begin{macro}{\@autobreak@end}
 % Finalization. It generates the whole lines in one go.
+% In the end, we need to restore the \cs{\textbackslash} command,
+% otherwise the next \env{autobreak} in the same \env{align} will
+% get in trouble.
+% \changes{v0.4}{2020/12/14}{Ignore \cs{\textbackslash}}
 %    \begin{macrocode}
 \def\@autobreak@end{%
   \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
     \expandafter{\the\@autobreak@linetoks}%
   \the\@autobreak@alltoks
+  \let\\\@autobreak@cr
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1139,14 +1144,15 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{\@autobreak@processline}
-% \changes{v0.2}{2016/07/03}{Fix space calculation around alignment
-%   tabs}
 % Each line from \cs{autobreak@scanline} should be regarded as a `block'
 % in the equation. The first block (typically the left-hand side $+$
 % `=') determines the indentation for the successive lines. From the
 % second block, try to append the block to the end of the line and
 % insert a line break if it does not fit in a line. Note that we measure
 % the widths of the blocks with putting |{}| around alignment tabs.
+% \changes{v0.2}{2016/07/03}{Fix space calculation around alignment
+%   tabs}
+% \changes{v0.4}{2020/12/14}{Ignore \cs{\textbackslash}}
 %    \begin{macrocode}
 \def\@autobreak@processline#1{%
   \ifdim\@autobreak@lhswidth=\z@
@@ -1171,7 +1177,7 @@ version 2005/12/01 or later.
       \fi
       \@autobreak@maxrhswidth=\linewidth
       \advance\@autobreak@maxrhswidth by -\@autobreak@maxlhswidth
-      \@autobreak@alltoks={#1{}&}%
+      \@autobreak@alltoks={\@autobreak@setcr#1{}&\@autobreak@setcr}%
     \fi
   \else
 %    \end{macrocode}
@@ -1185,7 +1191,7 @@ version 2005/12/01 or later.
 %    \begin{macrocode}
       \edef\@tempa{\the\@autobreak@linetoks\the\everybeforeautobreak}%
       \expandafter\@autobreak@addtoks\expandafter\@autobreak@alltoks
-        \expandafter{\@tempa\notag\\&}%
+        \expandafter{\@tempa\notag\@autobreak@cr&\@autobreak@setcr}%
       \@autobreak@linetoks=\everyafterautobreak
     \fi
     \@autobreak@addtoks\@autobreak@linetoks{#1}%
@@ -1204,12 +1210,24 @@ version 2005/12/01 or later.
 % \end{macro}
 %
 % \begin{macro}{\@autobreak@settowidth}
-% Same as \cs{settowidth} but in math mode. We assume \cs{displaystyle}.
-% (Anyway \env{align} issues \cs{displaystyle} at the beginning of every
-% cell.)
+% Same as \cs{settowidth} but in math mode. We assume \cs{displaystyle}
+% (anyway \env{align} issues \cs{displaystyle} at the beginning of every
+% cell). All \cs{\textbackslash} are ignored.
+% \changes{v0.4}{2020/12/14}{Ignore \cs{\textbackslash}}
 %    \begin{macrocode}
 \def\@autobreak@settowidth#1#2{%
-  \settowidth#1{$\displaystyle#2$}%
+  \settowidth#1{\let\\\@empty$\displaystyle#2$}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@autobreak@setcr}
+% Sets the meaning of \cs{\textbackslash} in \env{autobreak}, i.e., ignored.
+% This command is inserted at the beginning of each line in the token list.
+%    \begin{macrocode}
+\def\@autobreak@setcr{%
+  \let\@autobreak@cr\\
+  \let\\\@empty
 }
 %    \end{macrocode}
 % \end{macro}
